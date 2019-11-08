@@ -1,0 +1,14 @@
+Idle2: dung quay trai phai(1-18)
+Idle3: Dung yen chuan bi tung tao(19-23)
+Idle4: Dung yen tung tao(24-33)
+Idle5: tung tao qua nguoi(37-53)
+Running:Chay(57-68)
+Ngua mat:71
+Jumping1:Dung yen nhay(77-86)
+Jumping2: Di chuyen nhay(91-99)
+Parking: Dung lai(100-108)
+Attacking1: Dung yen tan cong(109-115)
+Sit: ngoi xuong(116)
+Attacking2: ngoi tan cong(117-125)
+Attacking3: Dang chay va tan cong
+ 

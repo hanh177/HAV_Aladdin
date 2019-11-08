@@ -1,0 +1,18 @@
+﻿  Brick.cpp
+  Game.cpp
+  GameObject.cpp
+d:\game\directxgame2\directxgame2\gameobject.cpp(36): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game\directxgame2\directxgame2\gameobject.cpp(41): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Grid.cpp
+d:\game\directxgame2\directxgame2\grid.cpp(125): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\game\directxgame2\directxgame2\grid.cpp(126): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\game\directxgame2\directxgame2\grid.cpp(127): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\game\directxgame2\directxgame2\grid.cpp(128): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\game\directxgame2\directxgame2\grid.cpp(138): warning C4018: '<': signed/unsigned mismatch
+  Ninja.cpp
+d:\game\directxgame2\directxgame2\ninja.cpp(127): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  SceneGame.cpp
+  main.cpp
+  Generating Code...
+d:\game\directxgame2\directxgame2\grid.cpp(97): warning C4715: 'Grid::NewObject': not all control paths return a value
+  DirectXGame2.vcxproj -> D:\Game\Game(3)\Debug\DirectXGame2.exe
