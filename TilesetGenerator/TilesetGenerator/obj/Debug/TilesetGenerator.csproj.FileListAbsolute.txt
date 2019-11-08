@@ -1,0 +1,10 @@
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.exe.config
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.exe
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.pdb
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csprojAssemblyReference.cache
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.Form1.resources
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.Properties.Resources.resources
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csproj.GenerateResource.cache
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csproj.CoreCompileInputs.cache
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.exe
+D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.pdb
