@@ -19,9 +19,7 @@ Aladin::Aladin()
 
 void Aladin::LoadResources()
 {
-	ifstream file, file2, file3, file4, file5, parking;
-	ifstream running, jumpping, jumpping2;
-	ifstream attacking1, attacking2, attacking3;
+	ifstream file;
 	int id,left, top, right, bottom, n;
 	CTexture *texture = CTexture::GetInstance();
 	CSprites *sprites = CSprites::GetInstance();
@@ -41,75 +39,80 @@ void Aladin::LoadResources()
 	AddAnimation(100);//0
 
 	////IDLE2(quay ngang trai phai)
-	file2.open("Resources/Aladin/Idle2.txt");
-	file2 >> n;//18
+	file.open("Resources/Aladin/Idle2.txt");
+	file >> n;//18
 	ani = new CAnimation(115);
 	for (int i = 0; i < n; i++)
 	{
-		file2 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000+id, left, top, right, bottom, texAladin2);
 		ani->Add(20000+id);
 		
 	}
 	animations->Add(200, ani);
 	AddAnimation(200);//1
+	file.close();
 
 	//dung yen tung tao
-	file3.open("Resources/Aladin/Idle3.txt");
-	file3 >> n;//7
+	file.open("Resources/Aladin/Idle3.txt");
+	file >> n;//7
 	ani = new CAnimation(100);
 	for (int i = 0; i < n; i++)
 	{
-		file3 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(300, ani);
 	AddAnimation(300);//2
+	file.close();
 
 	//chi tung tao
-	file4.open("Resources/Aladin/Idle4.txt");
-	file4 >> n;//7
+	file.open("Resources/Aladin/Idle4.txt");
+	file >> n;//7
 	ani = new CAnimation(100);
 	for (int i = 0; i < n; i++)
 	{
-		file4 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(400, ani);
 	AddAnimation(400);//3
+	file.close();
 
 	//Idle5
-	file5.open("Resources/Aladin/Idle5.txt");
-	file5 >> n;
+	file.open("Resources/Aladin/Idle5.txt");
+	file >> n;
 	ani = new CAnimation(100);
 	for (int i = 0; i < n; i++)
 	{
-		file5 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(500, ani);
 	AddAnimation(500);//4
+	file.close();
 
 	//Running1
-	running.open("Resources/Aladin/Running.txt");
-	running >> n;
+	file.open("Resources/Aladin/Running.txt");
+	file >> n;
 	ani = new CAnimation(46);
 	for (int i = 0; i < n; i++)
 	{
-		running >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(600, ani);
 	AddAnimation(600);//5
-	
+	file.close();
+
 	//ngua mat
 	ani = new CAnimation(100);
 	sprites->Add(20071, 111, 491, 160, 549, texAladin);
@@ -118,60 +121,64 @@ void Aladin::LoadResources()
 	AddAnimation(700);//6
 
 	//jumpping
-	jumpping.open("Resources/Aladin/Jumpping1.txt");
-	jumpping >> n;
+	file.open("Resources/Aladin/Jumpping1.txt");
+	file >> n;
 	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
-		jumpping >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(800, ani);
 	AddAnimation(800);//7
+	file.close();
 
 	//jumpping2
-	jumpping2.open("Resources/Aladin/Jumpping2.txt");
-	jumpping2 >> n;
+	file.open("Resources/Aladin/Jumpping2.txt");
+	file >> n;
 	ani = new CAnimation(125);
 	for (int i = 0; i < n; i++)
 	{
-		jumpping2 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(900, ani);
 	AddAnimation(900);//8
+	file.close();
 
 	//Parking
-	parking.open("Resources/Aladin/Parking.txt");
-	parking >> n;
+	file.open("Resources/Aladin/Parking.txt");
+	file >> n;
 	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
-		parking >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(1000, ani);
 	AddAnimation(1000);//9
+	file.close();
 
 	//attacking1: dung chem
-	attacking1.open("Resources/Aladin/Attacking1.txt");
-	attacking1 >> n;
+	file.open("Resources/Aladin/Attacking1.txt");
+	file >> n;
 	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
-		attacking1 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(1100, ani);
 	AddAnimation(1100);//10
+	file.close();
 
 	//cui dau
 	ani = new CAnimation(50);
@@ -181,35 +188,125 @@ void Aladin::LoadResources()
 	AddAnimation(1200);//11
 
 	//attacking2: ngoi chem
-	attacking2.open("Resources/Aladin/Attacking2.txt");
-	attacking2 >> n;
+	file.open("Resources/Aladin/Attacking2.txt");
+	file >> n;
 	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
-		attacking2 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(1300, ani);
 	AddAnimation(1300);//12
+	file.close();
 
 	//attacking3: vua di vua chem
-	attacking3.open("Resources/Aladin/Attacking3.txt");
-	attacking3 >> n;
+	file.open("Resources/Aladin/Attacking3.txt");
+	file >> n;
 	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
-		attacking3 >> id >> left >> top >> right >> bottom;
+		file >> id >> left >> top >> right >> bottom;
 		sprites->Add(20000 + id, left, top, right, bottom, texAladin2);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(1400, ani);
 	AddAnimation(1400);//13
+	file.close();
+
+	//attacking4: vua nhay vua chem
+	file.open("Resources/Aladin/Attacking4.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
+	animations->Add(1500, ani);
+	AddAnimation(1500);//14
+	file.close();
 
 
+	file.open("Resources/Aladin/AttackApple.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
 
+	}
+	animations->Add(1600, ani);
+	AddAnimation(1600);//15
+	file.close();
+
+	//ngoi nem tao
+	file.open("Resources/Aladin/AttackApple2.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
+	animations->Add(1700, ani);
+	AddAnimation(1700);//16
+	file.close();
+
+	//chay nem tao
+	file.open("Resources/Aladin/AttackApple3.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
+	animations->Add(1800, ani);
+	AddAnimation(1800);//17
+	file.close();
+	
+
+	//ngua mat tan cong
+	file.open("Resources/Aladin/Attacking5.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
+	animations->Add(1900, ani);
+	AddAnimation(1900);//18
+	file.close();
+
+	//Pushing
+	file.open("Resources/Aladin/Pushing.txt");
+	file >> n;
+	ani = new CAnimation(50);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
+	animations->Add(2000, ani);
+	AddAnimation(2000);//19
+	file.close();
 }
 
 void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
@@ -217,7 +314,9 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 	GameObject::Update(dt);
 	vy += ALADIN_GRAVITY * dt;
 
+	CollisionWithWall(coObject);
 	CollisionWithBrick(coObject);
+	
 	if (vx < 0 && x <8 ) x = 8;
 	Camera::GetInstance()->SetPosition(x+37,y);
 	
@@ -225,6 +324,7 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 
 void Aladin::Render()
 {
+	int formSize = 1;
 	int toHeight;
 	int ani_ID;
 	int loop;//0 là k lap
@@ -301,79 +401,143 @@ void Aladin::Render()
 			isIdleDoing = false;
 			loop = 0;
 			break;
-		case 8:
-				ani_ID = ALADIN_ANI_ATTACKING1;
-				if (animations[ani_ID]->GetCurrentFrame() == 4)
-				{
-					isIdleDoing = false;
-					isSet = true;
-					isAttacking = false;
-				}
-				loop = 1;
+		case 8://dung yen tan cong
+			ani_ID = ALADIN_ANI_ATTACKING1;
+			if (animations[ani_ID]->GetCurrentFrame() == 4)
+			{
+				isIdleDoing = false;
+				isSet = true;
+				isAttacking = false;
+			}
+			loop = 1;
 			break;
-		case 9:
+		case 9://ngoi tan cong
 			ani_ID = ALADIN_ANI_ATTACKING2;
 			if (animations[ani_ID]->GetCurrentFrame() == 6)
 			{
 				isIdleDoing = false;
 				isSet = true;
-				isAttacking = false;
-			
-			}	
+				attacking = -1;
+
+			}
+			loop = 1;
+			break;
+
+		case 10://dung nem tao
+			ani_ID = ALADIN_ANI_ATTACKAPPLE;
+			if (animations[ani_ID]->GetCurrentFrame() == 5)
+			{
+				isIdleDoing = false;
+				isSet = true;
+			}
+			loop = 1;
+			break;
+		case 11://ngoi nem tao
+			ani_ID = ALADIN_ANI_ATTACKAPPLE2;
+			if (animations[ani_ID]->GetCurrentFrame() == 3)
+			{
+				isIdleDoing = false;
+				isSet = true;
+				attacking = -1;
+	
+
+			}
+			loop = 1;
+			break;
+		case 12://ngua mat va tan cong
+			ani_ID = ALADIN_ANI_ATTACKING5;
+			if (animations[ani_ID]->GetCurrentFrame() == 18)
+			{
+				isIdleDoing = false;
+				attacking = -1;
+				isSet = true;
+			}
 			loop = 1;
 			break;
 		}
 	}
 	else
 	{
-		currentIdle = 1;
-		isCounting = true;
-		switch(mCurrentState)
-		{
-		case 1:
-			ani_ID = ALADIN_ANI_RUNNING;
-			loop = 1;
-			break;
-		case 2:
-			ani_ID = ALADIN_ANI_PARKING;
-			if (animations[ani_ID]->GetCurrentFrame() == 6)
-				isSet = true;
-			loop = 1;
-			break;
-		case 3:
-			ani_ID = ALADIN_ANI_ATTACKING3;
-			if (animations[ani_ID]->GetCurrentFrame() == 4)
+			currentIdle = 1;
+			isCounting = true;
+			switch (mCurrentState)
 			{
-				isIdleDoing = false;
-				isSet = true;
-				isAttacking = false;
-
+			case 1:
+				ani_ID = ALADIN_ANI_RUNNING;
+				loop = 1;
+				break;
+			case 2:
+				ani_ID = ALADIN_ANI_PARKING;
+				if (animations[ani_ID]->GetCurrentFrame() == 6)
+					isSet = true;
+				loop = 1;
+				break;
+			case 3://chay tan cong
+				ani_ID = ALADIN_ANI_ATTACKING3;
+				if (animations[ani_ID]->GetCurrentFrame() == 4)
+				{
+					isIdleDoing = false;
+					isSet = true;
+					attacking = -1;
+				}
+				loop = 1;
+				break;
+			case 4://chay nem tao
+				ani_ID = ALADIN_ANI_ATTACKAPPLE;
+				if (animations[ani_ID]->GetCurrentFrame() == 5)
+				{
+					isIdleDoing = false;
+					isSet = true;
+					attacking = -1;
+				}
+				loop = 1;
+				break;
+			case 5:
+				ani_ID = ALADIN_ANI_PUSHING;
+				loop = 1;
+				formSize = 2;
 			}
-			loop = 1;
-			break;
-		}
 	}
 
 	if (vy != 0)
 	{
 		if (!mCollisionWithBrick)
 		{
-			
 			loop = 1;
-			if (vx != 0)
+			if (isAttacking)
+			{
+				ani_ID = ALADIN_ANI_ATTACKING4;
+				if (animations[ani_ID]->GetCurrentFrame() == 5)
+				{
+					isIdleDoing = false;
+					isSet = true;
+					isAttacking = false;
+				}
+			}
+			else if (isAttacking2)
+					{
+						mCurrentState = 1;
+						ani_ID = ALADIN_ANI_ATTACKAPPLE3;
+						if (animations[ani_ID]->GetCurrentFrame() == 4)
+						{
+							isIdleDoing = false;
+							isSet = true;
+							isAttacking2 = false;
+						}
+					}
+			else if (vx != 0)
 				ani_ID = ALADIN_ANI_JUMPPING2;
 			else
 				ani_ID = ALADIN_ANI_JUMPPING;
 		}
-
-
-		
 	}
 	float toX = 0;
 	if (this->nx == -1)
 		toX = 37;
-	animations[ani_ID]->Render(x+toX, y + 52, loop, this->nx, Camera::GetInstance()->GetTranform(),1);
-	if (DISPLAY_BOX == 1)
+	if (formSize == 2)
+		toX = 40;
+	animations[ani_ID]->Render(x+toX, y + 52, loop, this->nx, Camera::GetInstance()->GetTranform(),formSize);
+	if (DISPLAY_BOX ==1 )
 	{
 		RenderBoundingBox(22,26);
 	}
@@ -386,7 +550,7 @@ void Aladin::SetState(int state)
 	switch (state)
 	{
 	case ALADIN_IDLE_STATE:
-		isSit = isRunning = false;
+		isSit =isFaceUp = false;
 		vx = 0;
 		mCurrentState = 1;
 		if (!isIdleDoing)
@@ -400,24 +564,36 @@ void Aladin::SetState(int state)
 		break;
 	case ALADIN_WALKING_LEFT_STATE:
 		vx = -ALADIN_WALKING_SPEED;
-		//isRunning = true;
 		mCurrentState = 1;
-		if (isAttacking)
+		if (attacking == 3)
 			mCurrentState = 3;
+		else if (attacking == 4)
+			mCurrentState = 4;
 		this->nx = -1;
 		break;
 	case ALADIN_WALKING_RIGHT_STATE:
-		vx = ALADIN_WALKING_SPEED;
-		//isRunning = true;
-		mCurrentState = 1;
-		if (isAttacking)
-			mCurrentState = 3;
+		if (!isCollisWithWall)
+		{
+			vx = ALADIN_WALKING_SPEED;
+			mCurrentState = 1;
+			if (attacking == 3)
+				mCurrentState = 3;
+			else if (attacking == 4)
+				mCurrentState = 4;
+		}
+		else
+		{
+			mCurrentState = 5;
+		}
 		this->nx = 1;
 		break;
 	case ALADIN_FACEUP_STATE:
 		vx = 0;
+		isFaceUp = true;
 		isIdleDoing = true;
 		currentIdle = 6;
+		if (attacking == 12)
+			currentIdle = 12;
 		break;
 	case ALADIN_JUMPPING_STATE:
 		if (mCollisionWithBrick == true)
@@ -432,41 +608,91 @@ void Aladin::SetState(int state)
 		}
 		break;
 	case ALADIN_PARKING_STATE:
-		mCurrentState = 2;
-		if (isSet)
+		if (!isCollisWithWall)
 		{
-			animations[ALADIN_ANI_PARKING]->SetCurrentFrame();
-			isSet = false;
+			mCurrentState = 2;
+			if (isSet)
+			{
+				animations[ALADIN_ANI_PARKING]->SetCurrentFrame();
+				isSet = false;
+			}
+			vx = ALADIN_PARKING_SPEED * this->nx;
 		}
-		vx = ALADIN_PARKING_SPEED * this->nx;
 		break;
 	case ALADIN_SIT_STATE:
 		isSit = true;
 		currentIdle = 7;
-		if (isAttacking)
+		if (attacking == 9)
 			currentIdle = 9;
+		else if (attacking == 11)
+			currentIdle = 11;
 		isIdleDoing = true;
 		break;
 	case ALADIN_ATTACKING_STATE:
-		if (!isSit)
-			currentIdle = 8;
-		else if (vx!=0)
-			mCurrentState = 3;
-		else
-			currentIdle = 9;
-		
-		isAttacking = true;
-		isSit = isRunning=false;
+		if (vx == 0)//dung yen
+		{
+			if (isSit)//dang ngoi
+			{
+				currentIdle = 9;//ngoi tan cong
+				attacking = 9;
+				isSit = false;
+			}
+			else if (isFaceUp)
+			{
+				currentIdle = 12;//ngua mat va tan cong
+				isFaceUp = false;
+				attacking = 12;
+			}
+			else
+				currentIdle = 8;//dung yen tan cong
+		}
+		else //di chuyen theo phuong x
+		{
+				mCurrentState = 3;//chay va tan cong
+				attacking = 3;
+		}
+		if (vy != 0)
+			isAttacking = true;
 		if (isSet)
 		{
 			animations[ALADIN_ANI_ATTACKING1]->SetCurrentFrame();
 			animations[ALADIN_ANI_ATTACKING2]->SetCurrentFrame();
 			animations[ALADIN_ANI_ATTACKING3]->SetCurrentFrame();
+			animations[ALADIN_ANI_ATTACKING4]->SetCurrentFrame();
+			animations[ALADIN_ANI_ATTACKING5]->SetCurrentFrame();
 			isSet = false;
 		}
 		isIdleDoing = true;//trang thai dang dung va lam j do
 		break;
 
+	case ALADIN_ATTACKAPPLE_STATE:
+		if (vx == 0)//dung yen
+		{
+			if (isSit)//dang ngoi
+			{
+				currentIdle = 11;//ngoi nem tao
+				attacking = 11;
+				isSit = false;
+			}
+			else
+				currentIdle = 10;//dung yen nem tao
+		}
+		else //di chuyen theo phuong x
+		{
+			mCurrentState = 4;//chay va nem tao
+			attacking = 4;
+		}
+		if (vy != 0)
+			isAttacking2 = true;
+		isIdleDoing = true;
+		if (isSet)
+		{
+			animations[ALADIN_ANI_ATTACKAPPLE]->SetCurrentFrame();
+			animations[ALADIN_ANI_ATTACKAPPLE2]->SetCurrentFrame();
+			animations[ALADIN_ANI_ATTACKAPPLE3]->SetCurrentFrame();
+			isSet = false;
+		}
+		break;
 	}
 }
 
@@ -525,15 +751,15 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 
 			if (dynamic_cast<Brick *>(e->obj))//e->obj is Brick
 			{
-				if (e->nx != 0)
+				if (e->nx != 0)//co xay ra va cham theo phuong Ox
 				{
 					x += dx;
 				}
-				else
+				else//k xay ra va cham theo phuong Ox
 				{
 					x += min_tx * dx + nx * 0.4f;
 				}
-				if (e->ny == -1)
+				if (e->ny == -1)//dang di len
 				{
 					y += min_ty * dy + ny * 0.4f;
 					if (ny != 0)
@@ -542,7 +768,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 					}
 					mCollisionWithBrick = true;
 				}
-				else// Nhay duoi len
+				else// Nhay duoi len(ny==1)
 				{
 					y += dy;
 				}
@@ -573,6 +799,50 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				}
 			}
 		}
+	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+}
+
+void Aladin::CollisionWithWall(vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	coEventsResult.clear();
+
+	//lay ds cac brick trong list object hien co
+
+	vector<LPGAMEOBJECT> list_Wall;
+	list_Wall.clear();
+	for (UINT i = 0; i < coObject->size(); i++)
+	{
+		if (coObject->at(i)->GetType() == Type::WALL)
+		{
+			list_Wall.push_back(coObject->at(i));
+		}
+	}
+
+	CalcPotentialCollisions(&list_Wall , coEvents);
+
+	if (coEvents.size() != 0)//co xay ra va cham
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+			if (e->nx == -1)
+			{
+				dx = 0;
+				isCollisWithWall = true;
+			}
+
+		}
+	}
+	else
+	{
+		isCollisWithWall = false;
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }

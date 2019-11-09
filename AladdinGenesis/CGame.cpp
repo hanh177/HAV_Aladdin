@@ -85,10 +85,18 @@ void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top
 	r.right = right;
 	r.bottom = bottom;
 	D3DXVECTOR3 center;
-	if (formSize != 0)
-		center=D3DXVECTOR3(0,(bottom-top),0);
-	else
+	switch (formSize)
+	{
+	case 0:
 		center = D3DXVECTOR3((right - left) / 2, (bottom - top) / 2, 0);
+		break;
+	case 1:
+		center = D3DXVECTOR3(0, (bottom - top), 0);
+		break;
+	case 2:
+		center = D3DXVECTOR3((right-left), (bottom - top), 0);
+		break;
+	}
 	D3DXVECTOR3 p(x, y, 0);
 
 	spriteHandler->Draw(texture, &r, &center, &p, D3DCOLOR_ARGB(alpha, 255,255,255));
@@ -99,11 +107,12 @@ void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top
 void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy, float sl, float st, float sr, float sb,float &t, float &nx, float &ny)
 { 
 
-	float dx_entry, dx_exit, tx_entry, tx_exit;
+	float dx_entry, dx_exit; //quang duong can di de xay ra va cham,quang duwong can di tu luc xet den khi het va cham
+	float tx_entry, tx_exit;//tg de bat dau xay ra va cham, thoi gian tu luc xet den luc het xay ra va cham
 	float dy_entry, dy_exit, ty_entry, ty_exit;
 
-	float t_entry;
-	float t_exit;
+	float t_entry;//tg de bat dau xay ra va cham
+	float t_exit;//tg tu luc bat dau xet den khi den thuc va cham
 
 	t = -1.0f;			// no collision
 	nx = ny = 0;
@@ -178,15 +187,15 @@ void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy
 
 	t = t_entry;//tg khi nao se xay ra va cham
 
-	if (tx_entry > ty_entry)//tg se xay ra vc theo phuong x>theo phuong y ->phuong y va cham trk
+	if (tx_entry > ty_entry)//tg bat dau va cham theo Ox>tg bat dau va cham theo Oy->k va cham theo phuong y
 	{
-		ny = 0.0f;
-		dx > 0 ? nx = -1.0f : nx = 1.0f;
+		ny = 0.0f;//huong(=0 tuc la k co va cham)
+		dx > 0 ? nx = -1.0f : nx = 1.0f;//dx: quang duong de bat dau va cham theo phuong x>0->dang di sang phai->nx=-1;(sang phai)
 	}
 	else//va cham xay ra theo phuong x trk
 	{
 		nx = 0.0f;
-		dy > 0 ? ny = -1.0f : ny = 1.0f;
+		dy > 0 ? ny = -1.0f : ny = 1.0f;//dy: quang duong can di de bat dau xay ra va cham>0->ny=-1;(di len)
 	}
 
 }

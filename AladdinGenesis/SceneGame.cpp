@@ -81,15 +81,15 @@ void SceneGame::KeyState(BYTE *state)
 	if (CKeyHandler::GetInstance()->isKeyDown(DIK_RIGHT))
 	{
 		isRunning = true;
-		if (timeRun == 0)
-			timeRun = GetTickCount();
+		if (mAladin->GetTimeRun() == 0)
+			mAladin->SetTimeRun(GetTickCount());
 		mAladin->SetState(ALADIN_WALKING_RIGHT_STATE);
 	}
 
 	else if (CKeyHandler::GetInstance()->isKeyDown(DIK_LEFT))
 	{
-		if (timeRun == 0)
-			timeRun = GetTickCount();
+		if (mAladin->GetTimeRun() == 0)
+			mAladin->SetTimeRun(GetTickCount());
 		isRunning = true;
 		mAladin->SetState(ALADIN_WALKING_LEFT_STATE);
 		
@@ -108,7 +108,7 @@ void SceneGame::KeyState(BYTE *state)
 	{
 		if (isRunning)
 		{
-			if (GetTickCount() - timeRun >= ALADIN_MIN_RUNNING_TIME)
+			if (GetTickCount() - mAladin->GetTimeRun()>= ALADIN_MIN_RUNNING_TIME)
 			{
 				if (time == 0)
 					time = GetTickCount();
@@ -117,7 +117,7 @@ void SceneGame::KeyState(BYTE *state)
 				else
 				{
 					isRunning = false;
-					timeRun = 0;
+					mAladin->SetTimeRun(0);
 					mAladin->SetState(ALADIN_IDLE_STATE);
 					time = 0;
 				}
@@ -125,7 +125,7 @@ void SceneGame::KeyState(BYTE *state)
 			else
 			{
 				isRunning = false;
-				timeRun = 0;
+				mAladin->SetTimeRun(0);
 				time = 0;
 				mAladin->SetState(ALADIN_IDLE_STATE);
 			}
@@ -148,6 +148,9 @@ void SceneGame::OnKeyDown(int KeyCode)
 		break;
 	case DIK_A:
 		mAladin->SetState(ALADIN_ATTACKING_STATE);
+		break;
+	case DIK_X:
+		mAladin->SetState(ALADIN_ATTACKAPPLE_STATE);
 		break;
 	}
 }

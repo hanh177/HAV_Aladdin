@@ -7,6 +7,7 @@
 #include <fstream>
 #include "MovingBrick.h"
 #include "Keyboard.h"
+#include "Wall.h"
 
 using namespace std;
 
@@ -31,9 +32,12 @@ using namespace std;
 #define ALADIN_ANI_SIT 11
 #define ALADIN_ANI_ATTACKING2 12
 #define ALADIN_ANI_ATTACKING3 13
-
-
-
+#define ALADIN_ANI_ATTACKING4 14
+#define ALADIN_ANI_ATTACKAPPLE 15
+#define ALADIN_ANI_ATTACKAPPLE2 16
+#define ALADIN_ANI_ATTACKAPPLE3 17
+#define ALADIN_ANI_ATTACKING5 18
+#define ALADIN_ANI_PUSHING 19 
 
 
 #define ALADIN_IDLE_STATE 0
@@ -44,6 +48,7 @@ using namespace std;
 #define ALADIN_PARKING_STATE 500
 #define ALADIN_SIT_STATE 600
 #define ALADIN_ATTACKING_STATE 700
+#define ALADIN_ATTACKAPPLE_STATE 800
 
 #define ALADIN_IDLE1_TIME 2000
 #define ALADIN_IDLE2_TIME 5000
@@ -58,12 +63,14 @@ class Aladin :public GameObject
 {
 
 	static Aladin * _instance;
-	bool mCollisionWithBrick, isJumping = false, isAttacking = false;
+	bool mCollisionWithBrick, isFaceUp, isAttacking = false, isAttacking2 = false, isCollisWithWall;
 	DWORD running1_Time;
-	DWORD time;
+	DWORD time, timeRun = 0;
 	int currentIdle = -1;
-	bool isCounting, isIdleDoing, isJumpping, isSet = true, isSit, isRunning;
-	int mCurrentState = 0;
+	bool isCounting, isIdleDoing, isSet = true, isSit;
+	int mCurrentState = 0, attacking;//bien attacking dung de xac dinh xem trang thai nao duoc uu tien thuc hien truoc khi co
+	//ca 2 hai thang cung duoc set
+	//vi du: ngoi va nhan nut tan cong thi tan cong duoc uu tien hoan thanh nen attacking=9; 9 dai dien cho currentIdle ngoi va tan cong
 	int toX, toY;
 	
 public:
@@ -74,12 +81,20 @@ public:
 	void SetState(int state);
 	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	void CollisionWithBrick(vector<LPGAMEOBJECT> *coObject);
+	void CollisionWithWall(vector<LPGAMEOBJECT> *coObject);
 	void ClearState(int lastState);
 	void StartCountingTime(int);
 	void StartCountingTime(DWORD &time)
 	{
 		time = GetTickCount();
 	}
+
+	void SetTimeRun(DWORD t)
+	{
+		timeRun = t;
+	}
+
+	DWORD GetTimeRun() { return timeRun; }
 	static Aladin *GetInstance();
 	~Aladin();
 };

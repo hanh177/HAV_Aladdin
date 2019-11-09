@@ -10,5 +10,13 @@ Parking: Dung lai(100-108)
 Attacking1: Dung yen tan cong(109-115)
 Sit: ngoi xuong(116)
 Attacking2: ngoi tan cong(117-125)
-Attacking3: Dang chay va tan cong
+Attacking3: Dang chay va tan cong(126-131)
+Attacking4: Nhay va tan cong(132-137)
+AttackApple: Dung nem tao(138-143)
+AttackApple2:Ngoi nem tao(144-148)
+AttackApple3: Nhay nem tao(149-153)
+Attacking5: Ngua mat va tan cong(149-168)
+Pushing: Day khi gap tuong
+
+
  

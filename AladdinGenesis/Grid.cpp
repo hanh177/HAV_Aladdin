@@ -102,6 +102,9 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 	case MOVINGBRICK:
 		return new MovingBrick(x, y, width, height);
 		break;
+	case WALL:
+		return new Wall(x, y, width, height);
+		break;
 	}
 }
 

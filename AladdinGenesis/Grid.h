@@ -7,6 +7,7 @@
 #include"Arrow.h"
 #include "Bob.h"
 #include "MovingBrick.h"
+#include"Wall.h"
 
 #define GRID_CELL_HEIGHT 280
 #define GRID_CELL_WIDTH (SCREEN_WIDTH/2.0f)

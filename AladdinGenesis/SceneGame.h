@@ -20,7 +20,7 @@ class SceneGame :public Scene
 	Camera *mCamera;
 	Grid *mGrid;
 	bool isRunning;
-	DWORD timeRun = 0, time;
+	DWORD  time;
 
 	vector<LPGAMEOBJECT> obj;
 public:
