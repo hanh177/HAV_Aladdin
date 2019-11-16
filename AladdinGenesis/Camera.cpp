@@ -77,7 +77,7 @@ void Camera::SetPosition(D3DXVECTOR3 pos)
 	
 	if (pos.x >= 2111)
 		pos.x = 2111;
-	if (pos.y >= 1000)
+	if (pos.y >1000)
 		pos.y = 1038;
 	mPosition = pos;
 

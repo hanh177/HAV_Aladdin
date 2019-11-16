@@ -137,6 +137,7 @@
     <ClCompile Include="Aladin.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="MovingBrick.cpp" />
+    <ClCompile Include="Rope.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Aladin.h" />
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="MovingBrick.h" />
+    <ClInclude Include="Rope.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="SceneManager.h" />

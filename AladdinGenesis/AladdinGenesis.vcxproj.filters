@@ -82,6 +82,9 @@
     <Filter Include="Object\Wall">
       <UniqueIdentifier>{a77fbf38-215f-499e-ac67-0cdd623461a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Rope">
+      <UniqueIdentifier>{3372209a-9a96-4e4c-b330-ca56d53d12e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,6 +153,9 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Object\Wall</Filter>
     </ClCompile>
+    <ClCompile Include="Rope.cpp">
+      <Filter>Object\Rope</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -217,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Object\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Object\Rope</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

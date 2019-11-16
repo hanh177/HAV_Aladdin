@@ -6,31 +6,28 @@
 #include "define.h"
 #include"Camera.h"
 #include <fstream>
+#include"debug.h"
+#include<tchar.h>
 
 using namespace std;
 
-
-#define MOVINGBRICK_IDLE_TIME 3000
-#define MOVINGBRICK_IDLE_TIME 3000
-
-
 class MovingBrick : public GameObject
 {
-
-	int mState = 0;
+	int mState, state0, dem = 0, delay = 0;
 	DWORD t = 0;
-	int isCollis, isCounting;
+	int isCollis;
+	bool isReset;
 	int width, height;
-	bool isStart;
-	
 public:
-	MovingBrick(float x, float y, int width, int height);
+	MovingBrick(float x, float y, int width, int height,int state);
 	void LoadResources();
 	void Render();
 	void Update(DWORD dt);
-	void StartCountingTime(DWORD &t);
+	void Reset();
 	void GetBoundingBox(float & left, float & top, float & right, float & bottom);
 	~MovingBrick();
 };
+
+
 
 

@@ -1,11 +1,12 @@
 #include "Arrow.h"
 
-Arrow::Arrow(float x, float y, int width, int height)
+Arrow::Arrow(float x, float y, int width, int height,int state)
 {
 	this->x = x;
 	this->y = y;
 	this->height = height;
 	this->width = width;
+	mState = state;
 	LoadResources();
 }
 
@@ -20,16 +21,11 @@ void Arrow::LoadResources()
 	LPDIRECT3DTEXTURE9 texArrow = texture->Get(Type::Map_Object);
 	
 	LPANIMATION ani;
-	sprites->Add(10001,982,381,1031,416, texArrow);
+	
 
-	ani = new CAnimation(120);
-	ani->Add(10001);
-	animations->Add(100, ani);
-	AddAnimation(100);//0
-
-	//2
+	//di ra ngoai
 	file.open("Resources/Object/Arrow.txt");
-	file >> n;//18
+	file >> n;
 	ani = new CAnimation(25);
 	for (int i = 0; i < n; i++)
 	{
@@ -38,44 +34,45 @@ void Arrow::LoadResources()
 		ani->Add(id);
 
 	}
+	animations->Add(100, ani);
+	AddAnimation(100);//0
+	file.close();
+
+	//dung yen ben ngoai
+	sprites->Add(10006, 1344, 380, 1393, 415, texArrow);
+	ani = new CAnimation(120);
+	ani->Add(10006);
 	animations->Add(200, ani);
 	AddAnimation(200);//1
+
+	//di vao trong
+	file.open("Resources/Object/Arrow2.txt");
+	file >> n;
+	ani = new CAnimation(25);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(id, left, top, right, bottom, texArrow);
+		ani->Add(id);
+
+	}
+	animations->Add(300, ani);
+	AddAnimation(300);//2
+	file.close();
+
+	//dung yen ben trong
+	sprites->Add(10013, 982, 381, 1031, 416, texArrow);
+	ani = new CAnimation(120);
+	ani->Add(10013);
+	animations->Add(400, ani);
+	AddAnimation(400);//3
 }
 
 void Arrow::Render()
 {
-	int ani_ID;
-	int loop;
+	int ani_ID = mState;
+	int loop = 1;
 	
-	switch (mState)
-	{
-	case 1:
-		if (animations[1]->GetCurrentFrame() == 12)
-		{
-			t = 0;
-			mState = 0;
-			isCounting = true;
-		}
-
-		ani_ID = 1;
-		loop = 1;
-		break;
-
-	case 0:
-		if (isCounting)
-		{
-			if(t==0)
-				StartCountingTime(t);
-		}
-		if (t!=0)
-		{
-			if (GetTickCount() - t >= ARROW_IDLE)
-				isCounting = false;
-		}
-		ani_ID = 0;
-		loop = 0;
-		break;
-	}
 	animations[ani_ID]->Render(this->x + 24.5, this->y + 17.5, loop, this->nx, Camera::GetInstance()->GetTranform());
 
 	if (DISPLAY_BOX == 1)
@@ -86,19 +83,39 @@ void Arrow::Render()
 
 void Arrow::Update(DWORD dt)
 {
-	float AlaX, AlaY;
-	Aladin::GetInstance()->GetPosition(AlaX, AlaY);
-	if (abs(AlaX - this->x) <= ARROW_ACTIVATE)
+	switch (mState)
 	{
-		if (!isCounting)
+	case 0://di ra
+		if (animations[0]->GetCurrentFrame() == 5)
+		{
+			dem = 0;
 			mState = 1;
-		else
+		}
+		break;
+	case 1://dung yen ben ngoai
+		dem++;
+		if (dem>=20)
+		{
+			mState = 2;
+			animations[2]->SetCurrentFrame();
+		}
+		break;
+	case 2://di vao
+		if (animations[2]->GetCurrentFrame() == 5)
+		{
+			dem = 0;
+			mState = 3;
+		}
+		break;
+	case 3://dung yen ben trong
+		dem++;
+		if (dem>=100)
+		{
 			mState = 0;
+			animations[0]->SetCurrentFrame();
+		}
+		break;
 	}
-	else
-		mState = 0;
-
-
 }
 
 void Arrow::StartCountingTime(DWORD & t)

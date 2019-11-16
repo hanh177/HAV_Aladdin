@@ -13,6 +13,7 @@ SceneGame::SceneGame(int state)
 	this->State = state;
 	mCamera = Camera::GetInstance();
 	mGrid = Grid::GetInstance();
+	mGrid->Clear();
 	LoadResources();
 	
 
@@ -37,7 +38,7 @@ void SceneGame::LoadResources()
 	mGamemap10 = new GameMap(Map10, "Resources/Map/map10_matrix.txt");
 	mMapObject = new MapObject("Resources/Map/mapObject.txt");
 	mCamera->SetTypeMap(Type::Map1);
-	mAladin->SetPosition(40, 1000);
+	mAladin->SetPosition(1184, 400);
 	mGrid->SetGridPath("Resources/Object/Object.txt");
 	
 }
@@ -80,22 +81,39 @@ void SceneGame::KeyState(BYTE *state)
 {
 	if (CKeyHandler::GetInstance()->isKeyDown(DIK_RIGHT))
 	{
-		isRunning = true;
-		if (mAladin->GetTimeRun() == 0)
-			mAladin->SetTimeRun(GetTickCount());
+		if (mAladin->GetDx() != 0)
+		{
+			isRunning = true;
+			if (mAladin->GetTimeRun() == 0)
+				mAladin->SetTimeRun(GetTickCount());
+		}
+		else
+			isRunning = false;
 		mAladin->SetState(ALADIN_WALKING_RIGHT_STATE);
 	}
 
 	else if (CKeyHandler::GetInstance()->isKeyDown(DIK_LEFT))
 	{
-		if (mAladin->GetTimeRun() == 0)
-			mAladin->SetTimeRun(GetTickCount());
-		isRunning = true;
+		if (mAladin->GetDx() != 0)
+		{
+			isRunning = true;
+			if (mAladin->GetTimeRun() == 0)
+				mAladin->SetTimeRun(GetTickCount());
+		}
+		else
+			isRunning = false;
+		
 		mAladin->SetState(ALADIN_WALKING_LEFT_STATE);
 		
 	}
 	else if (CKeyHandler::GetInstance()->isKeyDown(DIK_UP))
 	{
+		if (mAladin->GetClimbing() != -1)
+		{
+			mAladin->SetClimbing(1);//1 là leo lên
+			mAladin->SetDY(10.0);
+		}
+		else
 		mAladin->SetState(ALADIN_FACEUP_STATE);
 		
 	}
@@ -106,14 +124,14 @@ void SceneGame::KeyState(BYTE *state)
 	}
 	else
 	{
-		if (isRunning)
+		if (isRunning&&!mAladin->getisPushing())
 		{
 			if (GetTickCount() - mAladin->GetTimeRun()>= ALADIN_MIN_RUNNING_TIME)
 			{
 				if (time == 0)
 					time = GetTickCount();
 				if (GetTickCount() - time < 500)
-					mAladin->SetState(ALADIN_PARKING_STATE);
+					mAladin->SetState(ALADIN_STOP_STATE);
 				else
 				{
 					isRunning = false;
@@ -134,6 +152,9 @@ void SceneGame::KeyState(BYTE *state)
 		else
 		{
 			mAladin->SetState(ALADIN_IDLE_STATE);
+			mAladin->SetTimeRun(0);
+			if(mAladin->GetClimbing()==1)
+				mAladin->SetClimbing(0);
 		}
 	}
 }
@@ -144,7 +165,7 @@ void SceneGame::OnKeyDown(int KeyCode)
 	{
 	case DIK_SPACE:
 		mAladin->SetState(ALADIN_JUMPPING_STATE);
-		timeRun = 0;
+		mAladin->SetTimeRun(0);
 		break;
 	case DIK_A:
 		mAladin->SetState(ALADIN_ATTACKING_STATE);

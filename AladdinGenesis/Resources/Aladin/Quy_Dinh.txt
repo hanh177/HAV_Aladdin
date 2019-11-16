@@ -16,7 +16,9 @@ AttackApple: Dung nem tao(138-143)
 AttackApple2:Ngoi nem tao(144-148)
 AttackApple3: Nhay nem tao(149-153)
 Attacking5: Ngua mat va tan cong(149-168)
-Pushing: Day khi gap tuong
+Pushing: Day khi gap tuong(170-177)
+Climbing: Leo day(178-187)
+Climbing_Idle: trang thai dung yen tren day(188)
 
 
  

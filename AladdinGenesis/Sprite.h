@@ -75,6 +75,10 @@ public:
 	{
 		this->currentFrame = 0;
 	}
+	void SetCurrentFrame(int x)
+	{
+		this->currentFrame = x;
+	}
 };
 
 typedef CAnimation *LPANIMATION;

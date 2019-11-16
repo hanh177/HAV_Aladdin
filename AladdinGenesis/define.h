@@ -13,6 +13,8 @@ enum Type
 	BOB=22,
 	MOVINGBRICK=23,
 	WALL=24,
+	MOVINGBRICK2=25,
+	ROPE=26,
 
 	//Map tu 100
 	Map1 = 100,

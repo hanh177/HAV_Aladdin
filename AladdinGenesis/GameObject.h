@@ -51,8 +51,7 @@ protected:
 
 	DWORD dt;
 	int currentState;
-
-	int isIdle;
+	int movingBrickState;
 	vector<LPANIMATION> animations;
 
 public:
@@ -95,6 +94,7 @@ public:
 	virtual int GetState() { return currentState; };
 	virtual float GetVx() { return vx; }
 	virtual void LoadAni();
+	virtual void Reset();
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 
 	

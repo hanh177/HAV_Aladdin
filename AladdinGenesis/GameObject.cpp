@@ -58,6 +58,11 @@ void GameObject::LoadAni()
 
 }
 
+void GameObject::Reset()
+{
+
+}
+
 GameObject::~GameObject()
 {
 

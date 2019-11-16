@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameObject.h"
 #include "Camera.h"
 #include <vector>
@@ -8,15 +8,17 @@
 #include "MovingBrick.h"
 #include "Keyboard.h"
 #include "Wall.h"
+#include "Rope.h"
+#include"debug.h"
 
 using namespace std;
 
 
 
-#define ALADIN_WALKING_SPEED 0.12f
-#define ALADIN_GRAVITY 0.001f
-#define ALADIN_JUMPPING_SPEED 0.385f
-#define ALADIN_PARKING_SPEED 0.03f
+#define ALADIN_WALKING_SPEED 0.11f
+#define ALADIN_GRAVITY 0.0012f
+#define ALADIN_JUMPPING_SPEED 0.416f
+#define ALADIN_STOP_SPEED 0.03f
 
 #define ALADIN_ANI_IDLE1 0//dung yen
 #define ALADIN_ANI_IDLE2 1//quay trai phai
@@ -27,7 +29,7 @@ using namespace std;
 #define ALADIN_ANI_FACEUP 6
 #define ALADIN_ANI_JUMPPING 7
 #define ALADIN_ANI_JUMPPING2 8
-#define ALADIN_ANI_PARKING 9
+#define ALADIN_ANI_STOP 9
 #define ALADIN_ANI_ATTACKING1 10
 #define ALADIN_ANI_SIT 11
 #define ALADIN_ANI_ATTACKING2 12
@@ -38,6 +40,9 @@ using namespace std;
 #define ALADIN_ANI_ATTACKAPPLE3 17
 #define ALADIN_ANI_ATTACKING5 18
 #define ALADIN_ANI_PUSHING 19 
+#define ALADIN_ANI_CLIMBING 20
+#define ALADIN_ANI_CLIMBING_IDLE 21
+
 
 
 #define ALADIN_IDLE_STATE 0
@@ -45,32 +50,29 @@ using namespace std;
 #define ALADIN_WALKING_LEFT_STATE 200
 #define ALADIN_FACEUP_STATE 300
 #define ALADIN_JUMPPING_STATE 400
-#define ALADIN_PARKING_STATE 500
+#define ALADIN_STOP_STATE 500
 #define ALADIN_SIT_STATE 600
 #define ALADIN_ATTACKING_STATE 700
 #define ALADIN_ATTACKAPPLE_STATE 800
 
-#define ALADIN_IDLE1_TIME 2000
-#define ALADIN_IDLE2_TIME 5000
-#define ALADIN_IDLE3_TIME 500
-#define ALADIN_IDLE4_TIME 1000
-#define ALADIN_IDLE5_TIME 1000
+#define ALADIN_IDLE1_TIME 50
+#define ALADIN_IDLE2_TIME 50
 #define ALADIN_RUNNING1_TIME 1000
 #define ALADIN_MIN_RUNNING_TIME 1000
 
 
 class Aladin :public GameObject
 {
-
+	float ropeX, ropeY, X, DY;
 	static Aladin * _instance;
-	bool mCollisionWithBrick, isFaceUp, isAttacking = false, isAttacking2 = false, isCollisWithWall;
-	DWORD running1_Time;
-	DWORD time, timeRun = 0;
-	int currentIdle = -1;
-	bool isCounting, isIdleDoing, isSet = true, isSit;
-	int mCurrentState = 0, attacking;//bien attacking dung de xac dinh xem trang thai nao duoc uu tien thuc hien truoc khi co
-	//ca 2 hai thang cung duoc set
-	//vi du: ngoi va nhan nut tan cong thi tan cong duoc uu tien hoan thanh nen attacking=9; 9 dai dien cho currentIdle ngoi va tan cong
+	bool isCollisWithBrick, isCollisWithWall, isCollisWithRope, isClimbing;
+	int dem = 0, currentState = 1, index, climbing = -1;
+	//dem: biến đếm số lần update của cùng 1 trạng thái, currentState:biến nhận dạng trạng thái hiện tại
+	//index: dùng để biểu thị cho trạng thái đc ưu tiên khi có 2 trạng thái đồng thời xảy ra ví dụ đang chạy thì tấn công.
+	//sẽ rõ khi nhìn sang hàm chuyển trạng thái.
+	DWORD timeRun;//biến để ghi lại tg chạy của aladin phục vụ cho việc set state stop
+	bool isBusy, isSit = false, isResetFrame = true, isFaceUp, isPushing;
+	//biến nhận diện nếu đang trạng thái đứng yên và không làm gì thì nó bằng false khi đó ta set trạng thái về trạng thái ban đầu
 	int toX, toY;
 	
 public:
@@ -82,18 +84,35 @@ public:
 	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	void CollisionWithBrick(vector<LPGAMEOBJECT> *coObject);
 	void CollisionWithWall(vector<LPGAMEOBJECT> *coObject);
-	void ClearState(int lastState);
-	void StartCountingTime(int);
-	void StartCountingTime(DWORD &time)
-	{
-		time = GetTickCount();
-	}
+	void CollisionWithRope(vector<LPGAMEOBJECT> *coObject);
 
-	void SetTimeRun(DWORD t)
+	int GetClimbing() { return this->climbing; }
+	void SetClimbing(int x) { this->climbing = x; }
+	void SetDY(float d) { this->DY = d; }
+
+	float GetDx()//lấy giá trị biến đổi về tọa độ x để kiểm tra xem nó có đang chạy hya k
+		//nếu nó khác 0 thì nó đang di chuyển theo phương ox. Ta có: dx=vx*dt(quãng đường bằng v * t)
+	{
+		return this->dx;
+	}
+	void SetTimeRun(DWORD t)//cài đặt thời gian chạy của aladin
 	{
 		timeRun = t;
 	}
+	void ResetFrame(int x)//set về frame đầu tiên của animation x
+	{
+		animations[x]->SetCurrentFrame();
+	}
 
+	int GetFrame(int x)//lấy frame hiện tại của animation x
+	{
+		return animations[x]->GetCurrentFrame();
+	}
+
+	bool getisPushing()//lấy trạng thái có pushing hay k
+	{
+		return isPushing;
+	}
 	DWORD GetTimeRun() { return timeRun; }
 	static Aladin *GetInstance();
 	~Aladin();

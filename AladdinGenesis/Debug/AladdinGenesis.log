@@ -1,5 +1,2 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (DirectXGame(3).vcxproj, DirectXGame2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Aladin.cpp
-d:\game\game(3)\aladdingenesis\aladin.cpp(539): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\game\game(3)\aladdingenesis\aladin.cpp(328): warning C4101: 'toHeight': unreferenced local variable
+﻿  SceneGame.cpp
   AladdinGenesis.vcxproj -> D:\Game\Game(3)\Debug\AladdinGenesis.exe

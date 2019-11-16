@@ -13,17 +13,18 @@ using namespace std;
 
 
 #define ARROW_ACTIVATE 128
-#define ARROW_IDLE 3200
+#define ARROW_IDLE_TIME 3500//ben trong
+#define ARROW_IDLE_TIME2 1000//ben ngoai
 
 class Arrow : public GameObject
 {
 
-	int mState;
+	int mState , dem;
 	DWORD t=0;
-	bool isCounting;
+	bool isCounting = true;
 	int width, height;
 public:
-	Arrow(float x, float y,int width,int height);
+	Arrow(float x, float y,int width,int height,int state);
 	void LoadResources();
 	void Render();
 	void Update(DWORD dt);

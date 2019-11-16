@@ -1,0 +1,8 @@
+Arrow:mui ten di ra(0-5)
+Arrow_Idle:Mui ten di ra dung yen(6)
+Arrow2:Mui ten di vao(7-12)
+Arrow_Idle2:Mui ten di vao dung yen(13)
+8 22 0 33 67 976 1008 0
+10 23 0 42 24 1328 944 0
+12 23 0 42 24 1296 640 0
+
