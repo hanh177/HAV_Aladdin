@@ -64,12 +64,6 @@
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{53de7b66-caf6-4cbe-a346-c3bab1df0059}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Enemy\NewFilter1">
-      <UniqueIdentifier>{8dd462aa-d052-4258-af1c-6535fc8b708d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Enemy\NewFilter1\WhiteSwordMan">
-      <UniqueIdentifier>{72a953a6-b016-4b5b-93e6-52b26ef1e085}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Arrow">
       <UniqueIdentifier>{10d62f42-67b9-4344-a606-e407e6487667}</UniqueIdentifier>
     </Filter>
@@ -84,6 +78,63 @@
     </Filter>
     <Filter Include="Object\Rope">
       <UniqueIdentifier>{3372209a-9a96-4e4c-b330-ca56d53d12e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon">
+      <UniqueIdentifier>{cabc3d75-0588-4d83-8b98-d43ccc9ab7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\Apple">
+      <UniqueIdentifier>{2300a2af-0f0b-4e4b-934f-3167a67f292e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items">
+      <UniqueIdentifier>{68df5e83-e57f-465f-a3a7-957e51ea4673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\AppleItems">
+      <UniqueIdentifier>{a2baa825-cc5b-4f41-8dc2-d72699edf777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Red Jewel">
+      <UniqueIdentifier>{5c7300bb-f0fa-4033-a9e8-cb05e6fb095f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Genie">
+      <UniqueIdentifier>{d36b18f7-ecba-496b-8b09-3dd6bf5dd13b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Heart">
+      <UniqueIdentifier>{6817defb-d9a3-431a-b8e2-0064c845028b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\RestartPoint">
+      <UniqueIdentifier>{3fd21d5e-d7d7-448e-9b42-53826329e0ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board">
+      <UniqueIdentifier>{36b06c7f-8bbc-4ec4-a01c-a5aebea3b0ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\HealthBoard">
+      <UniqueIdentifier>{329d7493-056e-413e-8d44-b540a5b043cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\RedJewelBoard">
+      <UniqueIdentifier>{f877fbd0-0a23-4b9e-903c-06d9b13cd181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\Font">
+      <UniqueIdentifier>{0c963efb-9581-4780-8e19-bc7abd558110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\AppleBoard">
+      <UniqueIdentifier>{4b295f47-0db9-4d21-83b4-dac2076c4cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Bat">
+      <UniqueIdentifier>{49f3d52e-5468-4e76-8c5b-4c70ad76a2d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Guard">
+      <UniqueIdentifier>{a6603e30-0b44-4dba-be5b-a1a396be3f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\GuardWeapon">
+      <UniqueIdentifier>{3d6834e2-c320-4c82-977c-97ce5bdaffb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Skeleton">
+      <UniqueIdentifier>{d788f150-8a82-45d0-b6f9-fb7291e019d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Monkey">
+      <UniqueIdentifier>{53c7cc69-7222-46fb-adfc-1273b87dcf7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\Bone">
+      <UniqueIdentifier>{48cfc753-1043-4f93-afbf-bf65b4628d8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +183,6 @@
     <ClCompile Include="debug.cpp">
       <Filter>GameComponents\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="WhiteSwordMan.cpp">
-      <Filter>Object\Enemy\NewFilter1\WhiteSwordMan</Filter>
-    </ClCompile>
     <ClCompile Include="Aladin.cpp">
       <Filter>MainCharacter</Filter>
     </ClCompile>
@@ -155,6 +203,72 @@
     </ClCompile>
     <ClCompile Include="Rope.cpp">
       <Filter>Object\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="Apple.cpp">
+      <Filter>Object\Weapon\Apple</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleItem.cpp">
+      <Filter>Object\Items\AppleItems</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RedJewel.cpp">
+      <Filter>Object\Items\Red Jewel</Filter>
+    </ClCompile>
+    <ClCompile Include="Genie.cpp">
+      <Filter>Object\Items\Genie</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Object\Items\Heart</Filter>
+    </ClCompile>
+    <ClCompile Include="RestartPoint.cpp">
+      <Filter>Object\Items\RestartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBoard.cpp">
+      <Filter>GameComponents\Board\HealthBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>GameComponents\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="RedJewelBoard.cpp">
+      <Filter>GameComponents\Board\RedJewelBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>GameComponents\Board\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleBoard.cpp">
+      <Filter>GameComponents\Board\AppleBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Object\Enemy\Bat</Filter>
+    </ClCompile>
+    <ClCompile Include="Guard.cpp">
+      <Filter>Object\Enemy\Guard</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordGuard.cpp">
+      <Filter>Object\Weapon\GuardWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Object\Enemy\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Monkey.cpp">
+      <Filter>Object\Enemy\Monkey</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>Object\Weapon\Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="define.cpp">
+      <Filter>GameComponents\GameDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBoss.cpp">
+      <Filter>Scenes\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,9 +317,6 @@
     <ClInclude Include="debug.h">
       <Filter>GameComponents\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="WhiteSwordMan.h">
-      <Filter>Object\Enemy\NewFilter1\WhiteSwordMan</Filter>
-    </ClInclude>
     <ClInclude Include="Aladin.h">
       <Filter>MainCharacter</Filter>
     </ClInclude>
@@ -226,6 +337,69 @@
     </ClInclude>
     <ClInclude Include="Rope.h">
       <Filter>Object\Rope</Filter>
+    </ClInclude>
+    <ClInclude Include="Apple.h">
+      <Filter>Object\Weapon\Apple</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleItem.h">
+      <Filter>Object\Items\AppleItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RedJewel.h">
+      <Filter>Object\Items\Red Jewel</Filter>
+    </ClInclude>
+    <ClInclude Include="Genie.h">
+      <Filter>Object\Items\Genie</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>Object\Items\Heart</Filter>
+    </ClInclude>
+    <ClInclude Include="RestartPoint.h">
+      <Filter>Object\Items\RestartPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBoard.h">
+      <Filter>GameComponents\Board\HealthBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>GameComponents\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="RedJewelBoard.h">
+      <Filter>GameComponents\Board\RedJewelBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>GameComponents\Board\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleBoard.h">
+      <Filter>GameComponents\Board\AppleBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Object\Enemy\Bat</Filter>
+    </ClInclude>
+    <ClInclude Include="Guard.h">
+      <Filter>Object\Enemy\Guard</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordGuard.h">
+      <Filter>Object\Weapon\GuardWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Object\Enemy\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Monkey.h">
+      <Filter>Object\Enemy\Monkey</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>Object\Weapon\Bone</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBoss.h">
+      <Filter>Scenes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

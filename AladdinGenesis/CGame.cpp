@@ -1,6 +1,5 @@
 #include "CGame.h"
 
-
 CGame * CGame::_instance = NULL;
 
 
@@ -95,6 +94,9 @@ void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top
 		break;
 	case 2:
 		center = D3DXVECTOR3((right-left), (bottom - top), 0);
+		break;
+	case 3:
+		center = D3DXVECTOR3((right - left), 0, 0);
 		break;
 	}
 	D3DXVECTOR3 p(x, y, 0);

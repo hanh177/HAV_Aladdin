@@ -48,6 +48,11 @@ void SceneManager::OnKeyUp(int KeyCode)
 	mScene->OnKeyUp(KeyCode);
 }
 
+void SceneManager::SetEvent(int mEvent)
+{
+	mScene->SetEvent(mEvent);
+}
+
 void SceneManager::LoadResources()
 {
 	mScene->LoadResources();
@@ -62,3 +67,4 @@ void SceneManager::Render()
 {
 	mScene->Render();
 }
+

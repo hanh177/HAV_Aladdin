@@ -7,6 +7,7 @@ Arrow::Arrow(float x, float y, int width, int height,int state)
 	this->height = height;
 	this->width = width;
 	mState = state;
+	this->type = Type::ARROW;
 	LoadResources();
 }
 
@@ -77,11 +78,11 @@ void Arrow::Render()
 
 	if (DISPLAY_BOX == 1)
 	{
-		RenderBoundingBox(this->width / 2, this->height / 2);
+		RenderBoundingBox(this->width / 4, this->height / 8);
 	}
 }
 
-void Arrow::Update(DWORD dt)
+void Arrow::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	switch (mState)
 	{
@@ -125,12 +126,12 @@ void Arrow::StartCountingTime(DWORD & t)
 
 void Arrow::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	if (mState!=0)
+	if (mState==1)
 	{
 		left = x;
 		top = y;
-		right = left + width;
-		bottom = top + height;
+		right = left + width/2;
+		bottom = top + height/4;
 	}
 	else
 	{

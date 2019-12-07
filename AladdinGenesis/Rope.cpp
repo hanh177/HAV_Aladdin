@@ -11,20 +11,23 @@ Rope::Rope(float X, float Y, int W, int H)
 	mWidth = W;
 	mHeight = H;
 
+	this->yStart = Y;
+	this->yEnd = Y + mHeight;
+
 	this->type = Type::ROPE;
 
 }
 
-void Rope::getStartEnd(float & xStart, float & xEnd)
+void Rope::getStartEnd(float & yStart, float & yEnd)
 {
-	xStart = this->x;
-	xEnd = this->x + mWidth;
+	yStart = this->yStart;
+	yEnd = this->yEnd;
 
 }
 
 void Rope::Render()
 {
-	if (DISPLAY_BOX == 0)
+	if (DISPLAY_BOX == 1)
 	{
 		RenderBoundingBox(this->mWidth / 2, this->mHeight / 2);
 	}

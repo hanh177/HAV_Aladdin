@@ -121,12 +121,40 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 	case ROPE:
 		return new Rope(x, y, width, height);
 		break;
+	case APPLEITEM:
+		return new AppleItem(x, y, width, height);
+		break;
+	case REDJEWEL:
+		return new RedJewel(x, y, width, height);
+		break;
+	case GENIE:
+		return new Genie(x, y, width, height);
+		break;
+	case HEART:
+		return new Heart(x, y, width, height);
+		break;
+	case RESTARTPOINT:
+		return new RestartPoint(id,x, y, width, height);
+		break;
+	case BAT:
+		return new Bat(x, y, direction);
+		break;
+	case GUARD:
+		return new Guard(x, y, direction);
+		break;
+	case SKELETON:
+		return new Skeleton(x, y, state);
+		break;
+	case MONKEY:
+		return new Monkey(x, y, direction);
+		break;
 	}
 }
 
 
 void Grid::ListObject(vector<GameObject*> &listObj)
 {
+	vector <int> listID;
 	Camera *camera = Camera::GetInstance();
 	RECT r = camera->GetBound();
 
@@ -138,18 +166,19 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 
 	listObj.clear();
 
-	//can 1 DS id cac object dang nam trong vung camera
+	//can 1 DS cac object dang nam trong vung camera
 	unordered_map<int, GameObject*> mapObj;
 
 	for (int i = top_cell; i <= bottom_cell; i++)//Theo Hang
 	{
 		for (int j = left_cell; j <= right_cell; j++)//Theo cot
 		{
+			/*listID.clear();
+			ReadMatrixGrid(i, j, listID);*/
 			for (int k = 0; k < cells[i][j].size(); k++)
 			{
-				//if (mapObj.find(cells[i][j].at(k)->GetID()) == mapObj.end()) // Kiem tra da them vao mapObject hay chua
-				//{
-					mapObj[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);//them vao neu chua co trong mapObject
+				mapObj[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);//them vao neu chua co trong mapObject
+				//mapObj[listID.at(k)]= cells[i][j].at(k);
 			}
 		}
 	}
@@ -159,7 +188,7 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 	int demmv = 0, dembob = 0;
 	for (auto& x : mapObj)
 	{
-		if (x.second->GetType() == Type::MOVINGBRICK&&isResetMV)
+		/*if (x.second->GetType() == Type::MOVINGBRICK&&isResetMV)
 		{
 			x.second->Reset();
 		}
@@ -170,7 +199,7 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 			x.second->Reset();
 		}
 		if (x.second->GetType() == Type::MOVINGBRICK)
-			demmv++;
+			demmv++;*/
 		listObj.push_back(x.second);
 	}
 
@@ -190,27 +219,40 @@ void Grid::ReadMatrixGrid(int row,int column,vector<int> &IdObj)
 {
 	ifstream file;
 	file.open("Resources/Object/ObjectMatrix.txt");
-	int i, j, tmp = 0, id = 0;
-	for (int z = 0; z < 75; z++)
+	int tmp;
+	int i = 0;
+	while (i <= 15)
 	{
-		tmp = id = 0;
-		file >> i;//ki tu dau tien
-		if (i != row)
+		file >> tmp;
+		if (tmp == row)
+		{
+			file >> tmp;
+			if (tmp == column)
+			{
+				while (tmp != -1)
+				{
+					file >> tmp;
+					if (tmp != -1)
+						IdObj.push_back(tmp);
+				}
+				break;
+			}
+			else
+			{
+				while (tmp != -1)
+				{
+					file >> tmp;
+				}
+				i++;
+			}
+		}
+		else
 		{
 			while (tmp != -1)
 			{
 				file >> tmp;
 			}
-		}
-		else
-		{
-			file >> j;
-			while (id != -1)
-			{
-				file >> id;
-				if(id!=1)
-					IdObj.push_back(id);
-			}
+			i++;
 		}
 	}
 	file.close();

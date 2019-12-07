@@ -9,8 +9,10 @@ void Camera::SetTypeMap(Type type_Map)
 	switch (this->mType_Map)
 	{
 	case Map1:
-		this->Map_End = Map1_End;
+		this->type = Map1;
 		break;
+	case MapBoss:
+		this->type = Map2;
 	}
 }
 
@@ -74,11 +76,19 @@ void Camera::SetPosition(D3DXVECTOR3 pos)
 
 	if (pos.x <= (SCREEN_WIDTH / 2))
 		pos.x = SCREEN_WIDTH / 2;
-	
-	if (pos.x >= 2111)
-		pos.x = 2111;
-	if (pos.y >1000)
-		pos.y = 1038;
+	if (this->type == Map1)
+	{
+		if (pos.x >= 2111)
+			pos.x = 2111;
+		if (pos.y > 1000)
+			pos.y = 1038;
+		if (pos.y <= 120)
+			pos.y = 120;
+	}
+	else
+	{
+
+	}
 	mPosition = pos;
 
 	
@@ -95,7 +105,6 @@ bool Camera::isContain(RECT r1, RECT r2)
 	{
 		return false;
 	}
-
 	return true;
 }
 

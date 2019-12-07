@@ -6,6 +6,10 @@ Scene::Scene()
 
 
 
+void Scene::SetEvent(int mEvent)
+{
+}
+
 Scene::~Scene()
 {
 }

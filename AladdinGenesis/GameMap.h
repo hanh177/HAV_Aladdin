@@ -14,7 +14,7 @@ class GameMap
 {
 	static GameMap *_instance;
 	int **mMatrix1, **mMatrix2, **mMatrix3, **mMatrix4, **mMatrix5;
-	int **mMatrix6, **mMatrix7, **mMatrix8, **mMatrix9, **mMatrix10;
+	int **mMatrix6, **mMatrix7, **mMatrix8, **mMatrix9, **mMatrix10, **mMatrixBoss;
 	int mColumns, mRows;
 	int mTileSize = 32;
 	LPCSTR filePath;

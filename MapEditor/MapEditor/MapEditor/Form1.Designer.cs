@@ -34,7 +34,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox_Map = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblSTT = new System.Windows.Forms.GroupBox();
+            this.lbID = new System.Windows.Forms.Label();
+            this.txtSTT = new System.Windows.Forms.TextBox();
             this.textBox_ReverseLo_End = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_ReverseLo_Start = new System.Windows.Forms.TextBox();
@@ -71,7 +73,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Map)).BeginInit();
             this.panel2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.lblSTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Object)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +125,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Controls.Add(this.lblSTT);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(3, 382);
@@ -131,31 +133,49 @@
             this.panel2.Size = new System.Drawing.Size(1121, 135);
             this.panel2.TabIndex = 1;
             // 
-            // groupBox2
+            // lblSTT
             // 
-            this.groupBox2.Controls.Add(this.textBox_ReverseLo_End);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.textBox_ReverseLo_Start);
-            this.groupBox2.Controls.Add(this.button_ExportGrid);
-            this.groupBox2.Controls.Add(this.button_ZoomOut);
-            this.groupBox2.Controls.Add(this.button_ZoomIn);
-            this.groupBox2.Controls.Add(this.checkBox_fillColor);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.button_Clear);
-            this.groupBox2.Controls.Add(this.button_Delete);
-            this.groupBox2.Controls.Add(this.textBox_NumObject);
-            this.groupBox2.Controls.Add(this.dataGridView_Object);
-            this.groupBox2.Controls.Add(this.comboBox_MultiFunc);
-            this.groupBox2.Controls.Add(this.comboBox_Name);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox2.Location = new System.Drawing.Point(228, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(893, 135);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Setting Object";
+            this.lblSTT.Controls.Add(this.lbID);
+            this.lblSTT.Controls.Add(this.txtSTT);
+            this.lblSTT.Controls.Add(this.textBox_ReverseLo_End);
+            this.lblSTT.Controls.Add(this.label9);
+            this.lblSTT.Controls.Add(this.textBox_ReverseLo_Start);
+            this.lblSTT.Controls.Add(this.button_ExportGrid);
+            this.lblSTT.Controls.Add(this.button_ZoomOut);
+            this.lblSTT.Controls.Add(this.button_ZoomIn);
+            this.lblSTT.Controls.Add(this.checkBox_fillColor);
+            this.lblSTT.Controls.Add(this.label10);
+            this.lblSTT.Controls.Add(this.button_Clear);
+            this.lblSTT.Controls.Add(this.button_Delete);
+            this.lblSTT.Controls.Add(this.textBox_NumObject);
+            this.lblSTT.Controls.Add(this.dataGridView_Object);
+            this.lblSTT.Controls.Add(this.comboBox_MultiFunc);
+            this.lblSTT.Controls.Add(this.comboBox_Name);
+            this.lblSTT.Controls.Add(this.label7);
+            this.lblSTT.Controls.Add(this.label6);
+            this.lblSTT.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblSTT.Location = new System.Drawing.Point(228, 0);
+            this.lblSTT.Name = "lblSTT";
+            this.lblSTT.Size = new System.Drawing.Size(893, 135);
+            this.lblSTT.TabIndex = 2;
+            this.lblSTT.TabStop = false;
+            this.lblSTT.Text = "Setting Object";
+            // 
+            // lbID
+            // 
+            this.lbID.AutoSize = true;
+            this.lbID.Location = new System.Drawing.Point(816, 68);
+            this.lbID.Name = "lbID";
+            this.lbID.Size = new System.Drawing.Size(28, 13);
+            this.lbID.TabIndex = 21;
+            this.lbID.Text = "STT";
+            // 
+            // txtSTT
+            // 
+            this.txtSTT.Location = new System.Drawing.Point(850, 65);
+            this.txtSTT.Name = "txtSTT";
+            this.txtSTT.Size = new System.Drawing.Size(34, 20);
+            this.txtSTT.TabIndex = 20;
             // 
             // textBox_ReverseLo_End
             // 
@@ -187,7 +207,7 @@
             // 
             // button_ExportGrid
             // 
-            this.button_ExportGrid.Location = new System.Drawing.Point(792, 65);
+            this.button_ExportGrid.Location = new System.Drawing.Point(765, 62);
             this.button_ExportGrid.Name = "button_ExportGrid";
             this.button_ExportGrid.Size = new System.Drawing.Size(50, 23);
             this.button_ExportGrid.TabIndex = 16;
@@ -238,7 +258,7 @@
             // 
             // button_Clear
             // 
-            this.button_Clear.Location = new System.Drawing.Point(818, 36);
+            this.button_Clear.Location = new System.Drawing.Point(828, 36);
             this.button_Clear.Name = "button_Clear";
             this.button_Clear.Size = new System.Drawing.Size(56, 23);
             this.button_Clear.TabIndex = 11;
@@ -258,7 +278,7 @@
             // 
             // textBox_NumObject
             // 
-            this.textBox_NumObject.Location = new System.Drawing.Point(818, 11);
+            this.textBox_NumObject.Location = new System.Drawing.Point(828, 11);
             this.textBox_NumObject.Name = "textBox_NumObject";
             this.textBox_NumObject.Size = new System.Drawing.Size(56, 20);
             this.textBox_NumObject.TabIndex = 9;
@@ -316,15 +336,8 @@
             "Dynamic"});
             this.comboBox_MultiFunc.FormattingEnabled = true;
             this.comboBox_MultiFunc.Items.AddRange(new object[] {
-            "ItemBluePoint",
-            "ItemRedPoint",
-            "ItemBlueShuriken",
-            "ItemRedShuriken",
-            "ItemFreezeTime",
-            "ItemHadoken",
-            "ItemHealth",
-            "ItemBlueStack",
-            "ItemRedStack",
+            "come in",
+            "come out",
             "NONE",
             "RIGHT",
             "LEFT"});
@@ -338,21 +351,26 @@
             this.comboBox_Name.FormattingEnabled = true;
             this.comboBox_Name.Items.AddRange(new object[] {
             "BRICK",
-            "STAIR",
-            "Dagger",
-            "BrownBird",
-            "Blade",
-            "Panther",
-            "BombGun",
-            "Footballguy",
-            "GunRage",
-            "GATE",
-            "BlackBird",
-            "Butterfly"});
+            "ARROW",
+            "MOVINGBRICK",
+            "BOB",
+            "WALL",
+            "APPLE",
+            "ROPE",
+            "APPLE",
+            "REDJEWEL",
+            "GENIE",
+            "HEART",
+            "RESTARTPOINT",
+            "BAT",
+            "GUARD",
+            "SKELETON",
+            "MONKEY"});
             this.comboBox_Name.Location = new System.Drawing.Point(73, 21);
             this.comboBox_Name.Name = "comboBox_Name";
             this.comboBox_Name.Size = new System.Drawing.Size(107, 21);
             this.comboBox_Name.TabIndex = 4;
+            this.comboBox_Name.SelectedIndexChanged += new System.EventHandler(this.comboBox_Name_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -504,8 +522,8 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Map)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.lblSTT.ResumeLayout(false);
+            this.lblSTT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Object)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -528,7 +546,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_ChooseFile;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox lblSTT;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.Button button_Delete;
@@ -552,6 +570,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Multifunc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Location;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReverseLoca;
+        private System.Windows.Forms.Label lbID;
+        private System.Windows.Forms.TextBox txtSTT;
     }
 }
 

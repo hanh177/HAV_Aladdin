@@ -7,6 +7,7 @@ class Scene
 protected:
 
 	int State;
+	int mEvent;
 public:
 	Scene();
 	virtual void KeyState(BYTE *state) = 0;
@@ -16,5 +17,6 @@ public:
 	virtual void LoadResources() = 0;
 	virtual void Update(DWORD dt) = 0;
 	virtual void Render() = 0;
+	virtual void SetEvent(int mEvent);
 	~Scene();
 };

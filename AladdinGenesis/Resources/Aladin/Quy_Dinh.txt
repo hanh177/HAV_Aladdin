@@ -19,6 +19,11 @@ Attacking5: Ngua mat va tan cong(149-168)
 Pushing: Day khi gap tuong(170-177)
 Climbing: Leo day(178-187)
 Climbing_Idle: trang thai dung yen tren day(188)
-
-
+JumpOnClimbing: Nhay khi dang leo(189-197)
+AttackOnClimbing: Tan cong khi dang leo day(198-205)
+AppleOnClimbing: Tan cong bang tao khi dang leo day(206-211)
+Weapon_Apple:qua tao dung de tan cong(212-215)
+Apple_Destroy:Qua tao no khi va cham voi brick(216-220)
+AttackApple4:Vua chay vua nem tao(221-226)
+BeingHurt: Aladdin bi thuong(227-232)
  

@@ -8,6 +8,7 @@ Bob::Bob(float x, float y, int width, int height,int state)
 	this->width = width;
 	mState = state;
 	state0 = state;
+	this->type = Type::BOB;
 	LoadResources();
 }
 
@@ -55,16 +56,24 @@ void Bob::LoadResources()
 
 void Bob::Render()
 {
-	
+
 	animations[mState]->Render(this->x + 16.5, this->y + 33.5, 1, this->nx, Camera::GetInstance()->GetTranform());
+	if (mState == 0)
+		if (animations[mState]->GetCurrentFrame() == 14 || animations[mState]->GetCurrentFrame() == 15)
+			isCollis = 1;
+		else
+			isCollis = 0;
+	else
+		isCollis = 0;
+
 	if (DISPLAY_BOX == 1)
 	{
-		RenderBoundingBox(this->width / 2, this->height / 2);
+		RenderBoundingBox(this->width / 4, this->height / 2);
 	}
 	
 }
 
-void Bob::Update(DWORD dt)
+void Bob::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	switch (mState)
 	{
@@ -109,7 +118,7 @@ void Bob::GetBoundingBox(float & left, float & top, float & right, float & botto
 	case 1:
 		left = x;
 		top = y;
-		right = left + width;
+		right = left + width/2;
 		bottom = top + height;
 	}
 }

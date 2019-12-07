@@ -8,3 +8,13 @@ D:\Game\SH-Studio-master\SH-Studio-master\MapEditor\MapEditor\MapEditor\obj\Debu
 D:\Game\SH-Studio-master\SH-Studio-master\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.CoreCompileInputs.cache
 D:\Game\SH-Studio-master\SH-Studio-master\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
 D:\Game\SH-Studio-master\SH-Studio-master\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe.config
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\bin\Debug\MapEditor.exe
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\bin\Debug\MapEditor.pdb
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.csprojAssemblyReference.cache
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.Form.resources
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.Properties.Resources.resources
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.cache
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.CoreCompileInputs.cache
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+D:\HAV_Aladdin\MapEditor\MapEditor\MapEditor\obj\Debug\MapEditor.pdb

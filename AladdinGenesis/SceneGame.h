@@ -7,9 +7,13 @@
 #include "Keyboard.h"
 #include"Grid.h"
 #include"MapObject.h"
+#include "Board.h"
+#include "SceneBoss.h"
 
 
-
+#define ALADIN_NORMAL 1
+#define ALADIN_DIE 0
+#define ALADIN_OVER -1
 class SceneGame :public Scene
 {
 
@@ -19,8 +23,11 @@ class SceneGame :public Scene
 	MapObject *mMapObject;
 	Camera *mCamera;
 	Grid *mGrid;
+	Board *mBoard;
 	bool isRunning;
 	DWORD  time;
+	bool isTransitionScene;
+	float xTrans, yTrans;
 
 	vector<LPGAMEOBJECT> obj;
 public:
@@ -28,7 +35,7 @@ public:
 	SceneGame(int State);
 	~SceneGame();
 	void LoadResources();
-
+	void SetEvent(int mEvent);
 	void Render();
 	void Update(DWORD dt);
 	void KeyState(BYTE *state);

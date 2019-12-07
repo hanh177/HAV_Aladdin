@@ -4,7 +4,6 @@
 #include<Windows.h>
 
 
-
 class CGame
 {
 	static CGame * _instance;

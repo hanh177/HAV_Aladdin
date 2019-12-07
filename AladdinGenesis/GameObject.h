@@ -7,6 +7,7 @@
 #include<vector>
 #include "define.h"
 #include <iostream>
+#include<fstream>
 #include <Windows.h>
 #include <algorithm>
 #include "Camera.h"
@@ -38,6 +39,7 @@ class GameObject
 {
 
 protected:
+	int health;
 	Type type;
 	int id;
 
@@ -51,7 +53,8 @@ protected:
 
 	DWORD dt;
 	int currentState;
-	int movingBrickState;
+	bool isCollisWithWeapon;
+	int isBeingHurt= - 1;
 	vector<LPANIMATION> animations;
 
 public:
@@ -72,11 +75,19 @@ public:
 
 	void SetPosition(float x, float y);
 	void GetPosition(float &x, float &y) { x = this->x; y = this->y; }
+	float GetPosY() { return this->y; }
+	float GetPosX() { return this->x; }
 
 	void SetSpeed(float vx, float vy);
 	void GetSpeed(float &vx, float &vy) { vx = this->vx; vy = this->vy; }
 	
 	void RenderBoundingBox(int, int);
+
+	int GetHealth() { return this->health; }
+	virtual void SubHealth() { this->health--; }
+	void SubHealth(int x) { this->health = this->health - x; }
+	void SetFinish() { }
+	void Healing(int x) { this->health += x; }
 
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
@@ -88,8 +99,23 @@ public:
 		float &nx,
 		float &ny);
 
+	bool AABBcollision(LPGAMEOBJECT gameobj);
+	bool GetIsCollisWithWeapon()
+	{
+		return this->isCollisWithWeapon;
+	}
 
-	virtual void Update(DWORD);
+	void SetIsBeingHurt(int isHurt)
+	{
+		this->isBeingHurt = isHurt;
+	}
+
+	int GetIsBeingHurt()
+	{
+		return this->isBeingHurt;
+	}
+
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 	virtual void Render();
 	virtual int GetState() { return currentState; };
 	virtual float GetVx() { return vx; }

@@ -14,6 +14,7 @@ class Camera
 	int mHeight;
 	Type mType_Map;
 	float Map_End;
+	int type;
 
 public:
 

@@ -8,3 +8,13 @@ D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\
 D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csproj.CoreCompileInputs.cache
 D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.exe
 D:\Game\SH-Studio-master\SH-Studio-master\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.pdb
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.exe.config
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.exe
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\bin\Debug\TilesetGenerator.pdb
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csprojAssemblyReference.cache
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.Form1.resources
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.Properties.Resources.resources
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csproj.GenerateResource.cache
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.csproj.CoreCompileInputs.cache
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.exe
+D:\HAV_Aladdin\TilesetGenerator\TilesetGenerator\obj\Debug\TilesetGenerator.pdb

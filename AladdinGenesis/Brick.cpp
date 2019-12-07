@@ -24,7 +24,7 @@ void Brick::getStartEnd(float & xStart, float & xEnd)
 
 void Brick::Render()
 {
-	if (DISPLAY_BOX == 0)
+	if (DISPLAY_BOX == 1)
 	{
 		RenderBoundingBox(this->mWidth / 2, this->mHeight / 2);
 	}

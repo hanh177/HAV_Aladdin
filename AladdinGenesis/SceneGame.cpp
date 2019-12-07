@@ -1,5 +1,5 @@
-#include"SceneGame.h"
-
+﻿#include"SceneGame.h"
+#include "define.h"
 
 SceneGame::SceneGame()
 {
@@ -11,8 +11,10 @@ SceneGame::SceneGame(int state)
 {
 	mAladin = Aladin::GetInstance();
 	this->State = state;
+	this->mEvent = ALADIN_NORMAL;
 	mCamera = Camera::GetInstance();
 	mGrid = Grid::GetInstance();
+	mBoard = Board::GetInstance();
 	mGrid->Clear();
 	LoadResources();
 	
@@ -38,43 +40,82 @@ void SceneGame::LoadResources()
 	mGamemap10 = new GameMap(Map10, "Resources/Map/map10_matrix.txt");
 	mMapObject = new MapObject("Resources/Map/mapObject.txt");
 	mCamera->SetTypeMap(Type::Map1);
-	mAladin->SetPosition(1184, 400);
+	xTrans = 2210;
+	mAladin->SetPosition(/*113,991*//*480,606*/ 1951,131);
 	mGrid->SetGridPath("Resources/Object/Object.txt");
 	
 }
 
+void SceneGame::SetEvent(int mEvent)
+{
+	this->mEvent = mEvent;
+}
+
 void SceneGame::Render()
 {
-
-	
-	mGamemap1->Draw(Type::Map1);
-	mGamemap2->Draw(Type::Map2);
-	mGamemap3->Draw(Type::Map3);
-	mGamemap4->Draw(Type::Map4);
-	mGamemap5->Draw(Type::Map5);
-	mGamemap6->Draw(Type::Map6);
-	mGamemap7->Draw(Type::Map7);
-	mGamemap8->Draw(Type::Map8);
-	mGamemap9->Draw(Type::Map9);
-	mGamemap10->Draw(Type::Map10);
-	
-	
-	for (auto x : obj)
+	switch (mEvent)
 	{
-		x->Render();
+	case ALADIN_NORMAL:
+		mGamemap1->Draw(Type::Map1);
+		mGamemap2->Draw(Type::Map2);
+		mGamemap3->Draw(Type::Map3);
+		mGamemap4->Draw(Type::Map4);
+		mGamemap5->Draw(Type::Map5);
+		mGamemap6->Draw(Type::Map6);
+		mGamemap7->Draw(Type::Map7);
+		mGamemap8->Draw(Type::Map8);
+		mGamemap9->Draw(Type::Map9);
+		mGamemap10->Draw(Type::Map10);
+
+		for (auto x : obj)
+		{
+			x->Render();
+		}
+		mAladin->Render();
+		mMapObject->Draw();
+		mBoard->Render();
+		break;
+	case ALADIN_DIE:
+		mAladin->Render();
+		break;
 	}
-	mAladin->Render();
-	mMapObject->Draw();
+	
 }
 
 void SceneGame::Update(DWORD dt)
 {
-	mGrid->ListObject(obj);
-	for (auto x : obj)
+	switch (mEvent)
 	{
-		x->Update(dt);
+	case ALADIN_NORMAL:
+		if (!isTransitionScene)
+		{
+			mGrid->ListObject(obj);
+			mBoard->Update();
+			for (auto x : obj)
+			{
+				x->Update(dt, &obj);
+			}
+			if (mAladin->GetIsRestart())
+			{
+				float x, y;
+				mAladin->getRestartPoint(x, y);
+				mAladin->SetPosition(x, y);
+				mAladin->SetState(ALADIN_IDLE_STATE);
+			}
+			mAladin->Update(dt, &obj);
+			if (mAladin->GetPosX() >= xTrans&&mAladin->GetPosY()<=175)
+				isTransitionScene = true;
+		}
+		else
+		{
+			SceneManager::GetInstance()->SetScene(new SceneBoss(2));
+		}
+		break;
+	case ALADIN_DIE:
+		mAladin->Update(dt, &obj);
+		break;
 	}
-	mAladin->Update(dt,&obj);
+	
 }
 
 void SceneGame::KeyState(BYTE *state)
@@ -110,19 +151,29 @@ void SceneGame::KeyState(BYTE *state)
 	{
 		if (mAladin->GetClimbing() != -1)
 		{
-			mAladin->SetClimbing(1);//1 l� leo l�n
-			mAladin->SetDY(10.0);
+			if(mAladin->GetPosY()<=mAladin->yRopeStart)
+				mAladin->SetClimbing(0);
+			else
+				mAladin->SetClimbing(1);//1 là leo lên
 		}
 		else
-		mAladin->SetState(ALADIN_FACEUP_STATE);
+			mAladin->SetState(ALADIN_FACEUP_STATE);
 		
 	}
 	else if (CKeyHandler::GetInstance()->isKeyDown(DIK_DOWN))
 	{
-		mAladin->SetState(ALADIN_SIT_STATE);
+		if (mAladin->GetClimbing() != -1)
+		{
+			if (mAladin->GetPosY()+30 >= mAladin->yRopeEnd)
+				mAladin->SetClimbing(-1);
+			else
+				mAladin->SetClimbing(2);//2 là leo xuống
+		}
+		else
+			mAladin->SetState(ALADIN_SIT_STATE);
 
 	}
-	else
+	else//k nhan
 	{
 		if (isRunning&&!mAladin->getisPushing())
 		{
@@ -153,7 +204,7 @@ void SceneGame::KeyState(BYTE *state)
 		{
 			mAladin->SetState(ALADIN_IDLE_STATE);
 			mAladin->SetTimeRun(0);
-			if(mAladin->GetClimbing()==1)
+			if(mAladin->GetClimbing()==1|| mAladin->GetClimbing()==2)
 				mAladin->SetClimbing(0);
 		}
 	}
@@ -172,6 +223,15 @@ void SceneGame::OnKeyDown(int KeyCode)
 		break;
 	case DIK_X:
 		mAladin->SetState(ALADIN_ATTACKAPPLE_STATE);
+		break;
+	case DIK_F:
+		mAladin->SetHealth(8);
+		break;
+	case DIK_S:
+		mAladin->SetHealth(-1);
+		break;
+	case DIK_D:
+		mAladin->SetNumApple();
 		break;
 	}
 }

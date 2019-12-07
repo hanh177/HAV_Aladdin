@@ -89,6 +89,12 @@ GameMap::GameMap(Type TypeMap, LPCSTR fileMatrixPath)
 		mMatrix10 = new int *[Map10_Rows];
 		for (int i = 0; i < Map10_Rows; i++)
 			mMatrix10[i] = new int[Map10_Columns];
+		break;
+	case MapBoss:
+		this->filePath = fileMatrixPath;
+		mMatrixBoss = new int *[MapBoss_Rows];
+		for (int i = 0; i < MapBoss_Rows; i++)
+			mMatrixBoss[i] = new int[MapBoss_Columns];
 	}
 	
 	LoadMatrix(TypeMap);
@@ -187,6 +193,14 @@ void GameMap::LoadMatrix(Type TypeMap)
 		}
 		ExportMatrix(mMatrix10, Map10_Rows, Map10_Columns);//lay phan tu cua ma tran ra
 		break;
+	case MapBoss:
+		file.open(filePath);
+		if (file.fail())
+		{
+			return;
+		}
+		ExportMatrix(mMatrixBoss, MapBoss_Rows, MapBoss_Columns);//lay phan tu cua ma tran ra
+		break;
 	}
 
 	
@@ -250,6 +264,10 @@ void GameMap::LoadMap(Type TypeMap)
 	case Map10:
 		texMap = texture->Get(TypeMap);
 		Map_Tile = Map10_Tile;
+		break;
+	case MapBoss:
+		texMap = texture->Get(TypeMap);
+		Map_Tile = MapBoss_Tile;
 		break;
 
 	}
@@ -343,6 +361,13 @@ void GameMap::Draw(Type TypeMap)
 		columns = Map10_Columns;
 		break;
 
+	case MapBoss:
+		Map_X = MapBoss_X;
+		Map_Y = MapBoss_Y;
+		rows = MapBoss_Rows;
+		columns = MapBoss_Columns;
+		break;
+
 	}
 
 
@@ -425,6 +450,10 @@ void GameMap::DrawMiniMap(Type TypeMap, float x, float y,int i,int j)
 
 	case Map10:
 		mSprites->Get(mMatrix10[i][j] + TypeMap * 150)->Draw(x + mTileSize / 2, y + mTileSize / 2, 0, mCamera->GetTranform());
+		break;
+
+	case MapBoss:
+		mSprites->Get(mMatrixBoss[i][j] + TypeMap * 150)->Draw(x + mTileSize / 2, y + mTileSize / 2, 0, mCamera->GetTranform());
 		break;
 
 	}

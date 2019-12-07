@@ -18,6 +18,7 @@ namespace MapEditor
         public string ReverseLo_Start;
         public string ReverseLo_End;
         public int ID { get => id; }
+        public int width, height;
 
         public CObject(int id, Rectangle region, string idName, string MultiFunc, string ReverseLo_Start, string ReverseLo_End)
         {
@@ -25,42 +26,80 @@ namespace MapEditor
             this.region = region;
             switch(idName)
             {
-                case "Dagger":
-                    this.idName = (int)eType.Dagger;
-                    break;
-                case "BrownBird":
-                    this.idName = (int)eType.BrownBird;
-                    break;
-                case "Blade":
-                    this.idName = (int)eType.Blade;
-                    break;
-                case "Panther":
-                    this.idName = (int)eType.Panther;
-                    break;
-                case "BombGun":
-                    this.idName = (int)eType.BombGun;
-                    break;
-                case "Footballguy":
-                    this.idName = (int)eType.Footballguy;
-                    break;
-                case "GunRage":
-                    this.idName = (int)eType.GunRage;
-                    break;
+               
                 case "BRICK":
                     this.idName = (int)eType.BRICK;
+                    this.height = 5;
                     break;
-                case "GATE":
-                    this.idName = (int)eType.GATE;
+                case "ARROW":
+                    this.idName = (int)eType.ARROW;
+                    this.width = 51;
+                    this.height = 35;
                     break;
-                case "STAIR":
-                    this.idName = (int)eType.STAIR;
+                case "BOB":
+                    this.idName = (int)eType.BOB;
+                    this.width = 33;
+                    this.height = 67;
                     break;
-                case "BlackBird":
-                    this.idName = (int)eType.Black_Bird;
+                case "MOVINGBRICK":
+                    this.idName = (int)eType.MOVINGBRICK;
+                    this.width = 42;
+                    this.height = 24;
                     break;
-                case "Butterfly":
-                    this.idName = (int)eType.ButterFly;
+                case "WALL":
+                    this.idName = (int)eType.WALL;
+                    this.width = 5;
                     break;
+                case "ROPE":
+                    this.idName = (int)eType.ROPE;
+                    this.width = 1;
+                    break;
+                case "APPLE":
+                    this.idName = (int)eType.APPLE;
+                    this.width = 11;
+                    this.height = 12;
+                    break;
+                case "REDJEWEL":
+                    this.idName = (int)eType.REDJEWEL;
+                    this.width = 17;
+                    this.height = 16;
+                    break;
+                case "GENIE":
+                    this.idName = (int)eType.GENIE;
+                    this.width = 38;
+                    this.height = 50;
+                    break;
+                case "HEART":
+                    this.idName = (int)eType.HEART;
+                    this.width = 19;
+                    this.height = 23;
+                    break;
+                case "RESTARTPOINT":
+                    this.idName = (int)eType.RESTARTPOINT;
+                    this.width = 20;
+                    this.height = 33;
+                    break;
+                case "BAT":
+                    this.idName = (int)eType.BAT;
+                    this.width = 56;
+                    this.height = 58;
+                    break;
+                case "GUARD":
+                    this.idName = (int)eType.GUARD;
+                    this.width = 47;
+                    this.height = 52;
+                    break;
+                case "SKELETON":
+                    this.idName = (int)eType.SKELETON;
+                    this.width = 51;
+                    this.height = 81;
+                    break;
+                case "MONKEY":
+                    this.idName = (int)eType.MONKEY;
+                    this.width = 44;
+                    this.height = 58;
+                    break;
+
             }
             switch(MultiFunc)
             {
@@ -70,33 +109,13 @@ namespace MapEditor
                 case "LEFT":
                     this.multiFunc = -1;
                     break;
-                case "ItemBluePoint":
-                    this.multiFunc = (int)eType.Item_Blue_Point;
+                case "come in":
+                    this.multiFunc = 1;
                     break;
-                case "ItemRedPoint":
-                    this.multiFunc = (int)eType.Item_Red_Point;
+                case "come out":
+                    this.multiFunc = 0;
                     break;
-                case "ItemBlueShuriken":
-                    this.multiFunc = (int)eType.Item_BlueShuriken;
-                    break;
-                case "ItemRedShuriken":
-                    this.multiFunc = (int)eType.Item_RedShuriken;
-                    break;
-                case "ItemBlueStack":
-                    this.multiFunc = (int)eType.Item_BlueStack;
-                    break;
-                case "ItemRedStack":
-                    this.multiFunc = (int)eType.Item_RedStack;
-                    break;
-                case "ItemHealth":
-                    this.multiFunc = (int)eType.Item_Heath;
-                    break;
-                case "ItemHadoken":
-                    this.multiFunc = (int)eType.Item_Hadoken;
-                    break;
-                case "ItemFreezeTime":
-                    this.multiFunc = (int)eType.Item_RedStack;
-                    break;
+
             }
             this.ReverseLo_Start = ReverseLo_Start;
             this.ReverseLo_End = ReverseLo_End;
@@ -104,7 +123,19 @@ namespace MapEditor
         public string Output()
         {
             string output;
-            output = idName.ToString() + " " + multiFunc.ToString() + " " + region.X.ToString() + " " + region.Y.ToString() + " " + region.Width.ToString()+" "+region.Height.ToString();
+            switch (idName)
+            {
+                case 20:
+                    width = region.Width;
+                    break;
+                case 26:
+                    height = region.Height;
+                    break;
+                case 24:
+                    height = region.Height;
+                    break;
+            }
+            output = idName.ToString() +" 0 "+width+" " +height+" " + region.X.ToString() + " " + region.Y.ToString()+ " " + multiFunc.ToString();
             return output;
         }
     }
@@ -116,29 +147,22 @@ namespace MapEditor
 
         // object nền(Bat Dau 20)
         BRICK = 20,
-        GATE = 21,
+        ARROW=21,
+        BOB=22,
+        MOVINGBRICK=23,
+        WALL=24,
+        ROPE=26,
+        APPLE=27,
+        REDJEWEL=28,
+        GENIE=29,
+        HEART=30,
+        RESTARTPOINT=31,
+        BAT=32,
+        GUARD=33,
+        SKELETON=36,
+        MONKEY=38,
 
         // object(Bat Dau 40)
-        STAIR = 40,
-
-
-        // weapon(Bat Dau 60)
-        BASICWEAPON = 60,
-        BlueShuriken = 61,
-
-
-        // item(Bat Dau 80)
-        Black_Bird = 80,
-        ButterFly = 81,
-        Item_BlueShuriken = 82,
-        Item_RedShuriken = 83,
-        Item_Freeze_Time = 84,
-        Item_BlueStack = 85,
-        Item_RedStack = 86,
-        Item_Hadoken = 87,
-        Item_Heath = 88,
-        Item_Blue_Point = 89,
-        Item_Red_Point = 90,
 
         // other (Bat Dau 100)
         Map1 = 100,
@@ -149,19 +173,6 @@ namespace MapEditor
 
 
         // Enemy(Bat Dau 120)
-        Dagger = 120,
-        BrownBird = 121,
-        Blade = 122,
-        Panther = 123,
-        BombGun = 124,
-        Footballguy = 125,
-        GunRage = 126,
-        Ememy_Texture = 127,
-
-        //BOSS(Bat Dau 140)
-        BOSS = 140
-
-        // Intro(Bat Dau 160)
-        // Effect(Bat Dau 180)
+      
     };
 }

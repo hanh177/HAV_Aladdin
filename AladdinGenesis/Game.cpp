@@ -5,7 +5,7 @@ void Game::GameInit(HWND hWnd)
 {
 	CGame::GetInstance()->Init(hWnd);
 	mSceneManager = SceneManager::GetInstance();
-	mSceneManager->SetScene(new SceneGame(1));
+	mSceneManager->SetScene(new SceneIntro());
 	mKeyboard = CKeyHandler::GetInstance();
 }
 
@@ -35,14 +35,12 @@ void Game::Render()
 
 	if (d3ddv->BeginScene())
 	{
-		//d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_RGBA(255, 0,255, 1), 0.0f, 0);
+		d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_RGBA(106, 148, 189, 1), 0.0f, 0);
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-
-
 		mSceneManager->Render();
-
 		spriteHandler->End();
+
 		d3ddv->EndScene();
 	}
 
@@ -54,7 +52,7 @@ int Game::Run()
 	MSG msg;
 	int done = 0;
 	DWORD frameStart = GetTickCount();
-	DWORD tickPerFrame = 500 / MAX_FRAME_RATE;
+	DWORD tickPerFrame = 500/ MAX_FRAME_RATE;
 
 	while (!done)
 	{

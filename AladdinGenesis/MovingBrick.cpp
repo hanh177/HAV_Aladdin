@@ -10,7 +10,6 @@ MovingBrick::MovingBrick(float x, float y, int width, int height,int state)
 	this->state0 = state;
 	this->type = Type::MOVINGBRICK;
 	LoadResources();
-	animations[state]->SetCurrentFrame();
 }
 
 void MovingBrick::LoadResources()
@@ -41,7 +40,7 @@ void MovingBrick::LoadResources()
 
 	file2.open("Resources/Object/MovingBrick2.txt");
 	file2 >> n;
-	ani = new CAnimation(50);
+	ani = new CAnimation(25);
 	for (int i = 0; i < n; i++)
 	{
 		file2 >> id >> left >> top >> right >> bottom;
@@ -62,7 +61,7 @@ void MovingBrick::LoadResources()
 
 	//thut ra ngoai
 	sprites->Add(10055, 1276, 618, 1318, 642, texMBrick);
-	ani = new CAnimation(50);
+	ani = new CAnimation(25);
 	ani->Add(10055);
 	animations->Add(400, ani);
 	AddAnimation(400);//3
@@ -95,11 +94,11 @@ void MovingBrick::Render()
 	animations[ani_ID]->Render(this->x + 21, this->y + 12, loop, this->nx, Camera::GetInstance()->GetTranform());
 	if (DISPLAY_BOX == 1)
 	{
-		RenderBoundingBox(this->width / 2, this->height / 2);
+		RenderBoundingBox(this->width / 2, this->height / 4);
 	}
 }
 
-void MovingBrick::Update(DWORD dt)
+void MovingBrick::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 		switch (mState)
 		{
@@ -138,19 +137,19 @@ void MovingBrick::Update(DWORD dt)
 
 void MovingBrick::Reset()
 {
-	GameObject::Reset();
 	dem = 0;
 	mState = state0;
+	animations[state0]->SetCurrentFrame();
 }
 
 void MovingBrick::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	if (mState!=2)
+	if (mState==3||mState==0)
 	{
 		left = x;
 		top = y;;
 		right = left + width/2+10;
-		bottom = top + height;
+		bottom = top + height/2;
 	}
 	else
 		left = top = right = bottom = 0;

@@ -27,7 +27,7 @@ public:
 	Arrow(float x, float y,int width,int height,int state);
 	void LoadResources();
 	void Render();
-	void Update(DWORD dt);
+	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	void StartCountingTime(DWORD &t);
 	void GetBoundingBox(float & left, float & top, float & right, float & bottom);
 	~Arrow();

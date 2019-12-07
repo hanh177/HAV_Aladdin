@@ -5,10 +5,11 @@
 class Rope :public GameObject
 {
 private:
-	float mB_Start, mB_End;
 
 	int mWidth, mHeight;
 
+	float yStart;
+	float yEnd;
 public:
 	Rope(float X, float Y, int W, int H);
 

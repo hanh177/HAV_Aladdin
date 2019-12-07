@@ -1,12 +1,20 @@
 #pragma once
+#include <algorithm>
 
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 enum Type
 {
+	ALADDIN=-1,
 	ALADIN = 01,
 	ALADIN2 = 2,
+	ALADIN3=3,
+	APPLE=4,
+	EXPLOSION=5,
+	ITEM=6,
+	ENEMY_BAT=7,
+	GUARDS=8,
 	BOX = 10,
 	BRICK = 20,
 	ARROW = 21,
@@ -15,6 +23,24 @@ enum Type
 	WALL=24,
 	MOVINGBRICK2=25,
 	ROPE=26,
+	APPLEITEM=27,
+	REDJEWEL=28,
+	GENIE=29,
+	HEART=30,
+	RESTARTPOINT=31,
+	BAT=32,
+	GUARD=33,
+	SWORDGUARD=34,
+	DIE=35,
+	SKELETON=36,
+	SKELETON_IMAGE=37,
+	MONKEY=38,
+	BONE=39,
+	GAME_INTRO=40,
+	SCENEINTRO=41,
+	SCENEGAME=42,
+	SCENEDIE=43,
+	SCENEOVER=44,
 
 	//Map tu 100
 	Map1 = 100,
@@ -88,10 +114,12 @@ enum Type
 	Map10_X = 1120,
 	Map10_Y = 896,
 
+	MapBoss=1100,
+	MapBoss_Rows=26,
+	MapBoss_Columns=14,
+	MapBoss_Tile=346,
+	MapBoss_X=0,
+	MapBoss_Y=0,
 	//MapObject
-	Map_Object = 10000,
-	//arrow tu 10001
-	//Enemy tu 500
-	Enemy=2000,
-	WhiteSwordMan=501
+	Map_Object = 10000
 };

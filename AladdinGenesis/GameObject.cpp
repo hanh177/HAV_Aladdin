@@ -68,7 +68,7 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::Update(DWORD dt)
+void GameObject::Update(DWORD dt , vector<LPGAMEOBJECT>* coObject)
 {
 	this->dt = dt;
 	dx = vx * dt;
@@ -160,6 +160,23 @@ void GameObject::FilterCollision(vector<LPCOLLISIONEVENT> &coEvents,vector<LPCOL
 
 	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
 	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
+}
+
+bool GameObject::AABBcollision(LPGAMEOBJECT gameobj)
+{
+	RECT rect1, rect2;
+	float left, top, right, bottom;
+	gameobj->GetBoundingBox(left, top, right, bottom);
+	rect1.left = left;
+	rect1.top = top;
+	rect1.right = right;
+	rect1.bottom = bottom;
+	this->GetBoundingBox(left, top, right, bottom);
+	rect2.left = left;
+	rect2.top = top;
+	rect2.right = right;
+	rect2.bottom = bottom;
+	return Camera::GetInstance()->isContain(rect1, rect2);
 }
 
 void GameObject::RenderBoundingBox(int toX,int toY)

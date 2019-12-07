@@ -9,6 +9,15 @@
 #include "MovingBrick.h"
 #include"Wall.h"
 #include "Rope.h"
+#include "AppleItem.h"
+#include "RedJewel.h"
+#include "Genie.h"
+#include "Heart.h"
+#include "RestartPoint.h"
+#include "Bat.h"
+#include "Guard.h"
+#include "Skeleton.h"
+#include "Monkey.h"
 #include<iostream>
 
 using namespace std;
