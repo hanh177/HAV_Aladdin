@@ -5,7 +5,7 @@
 #include "Keyboard.h"
 #include"SceneIntro.h"
 
-#define  MAX_FRAME_RATE 30;
+#define  MAX_FRAME_RATE 60;
 
 
 class Game

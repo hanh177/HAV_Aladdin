@@ -89,10 +89,12 @@ private:
 	D3DXVECTOR2 restartPoint=D3DXVECTOR2(113, 991);
 	bool isRestart, isReSetAni = true;
 	int idRestartPoint = 0;
+	
 	//rope
 	float ropeX, ropeY, X, DY;
 	
-	
+	//boss
+	bool isResetVx = true;//bên màn boss tránh lỗi hiển thị
 
 	//state machine
 
@@ -111,9 +113,9 @@ private:
 	Apple  *mApple;
 	bool isAttachApple, isFinish = true, isAttacking, isUntouchable, isSitAttach;
 	//items
-	int numRedJewel = 0, numApple = 0, collisGuard = 0, point = 0;
+	int numRedJewel = 0, numApple = 0, collisGuard = 0, point = 0,life = 10;
 
-
+	float changeVx = 1;
 public:
 	
 	float yRopeStart = 0;
@@ -234,6 +236,21 @@ public:
 	{
 		return idRestartPoint;
 	}
+
+	void SetVx(float x)
+	{
+		this->vx = (x*(this->nx*-1));
+	}
+
+	void SetChangeVx(float delta) { this->changeVx= delta; }
+
+	void SetIsBusy(bool isBusy) { this->isBusy = isBusy; }
+	void SetIsResetVx(bool iReset) { this->isResetVx = iReset; }
+	void SetRestartPoint(D3DXVECTOR2 pos)
+	{
+		restartPoint = pos;
+	}
+	int GetLife() { return this->life; }
 	static Aladin *GetInstance();
 	~Aladin();
 };

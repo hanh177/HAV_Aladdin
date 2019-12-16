@@ -26,6 +26,7 @@ public:
 	void LoadBone();
 	void Render();
 	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
+	void Revival();
 	void GetBoundingBox(float & left, float & top, float & right, float & bottom);
 	~Skeleton();
 

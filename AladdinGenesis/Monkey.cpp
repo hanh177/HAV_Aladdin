@@ -1,16 +1,15 @@
 #include "Monkey.h"
 #include "Aladin.h"
+#include"Sound.h"
 
 Monkey::Monkey(float x, float y, int direction)
 {
-	this->x = x;
-	this->y = y;
+	this->x= this->x0 = x;
+	this->y=this->y0 = y;
 	this->nx = direction;
 	this->state = 0;
 	this->type = Type::MONKEY;
 	this->health = 4;
-	this->x0 = x;
-	this->y0 = y;
 	isFinished = false;
 	mSwordGuard = new SwordGuard(35,56,32);
 	LoadResources();
@@ -156,7 +155,7 @@ void Monkey::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (animations[5]->GetCurrentFrame() == 7)
 			{
 				isFinished = true;
-				Aladin::GetInstance()->PlusPoint(40);
+				Aladin::GetInstance()->PlusPoint(200);
 			}
 		}
 		else
@@ -268,6 +267,18 @@ void Monkey::GetBoundingBox(float & left, float & top, float & right, float & bo
 	top = y;
 	bottom = top + 58;
 
+}
+
+void Monkey::Revival()
+{
+	this->x = this->x0;
+	this->y = this->y0;
+	this->state = 0;
+	this->health = 4;
+	isFinished = false;
+	animations[2]->SetCurrentFrame();
+	isBeingHurt = -1;
+	animations[5]->SetCurrentFrame();
 }
 
 Monkey::~Monkey()

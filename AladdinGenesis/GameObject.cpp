@@ -63,6 +63,10 @@ void GameObject::Reset()
 
 }
 
+void GameObject::Revival()
+{
+}
+
 GameObject::~GameObject()
 {
 

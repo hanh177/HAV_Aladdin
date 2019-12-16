@@ -21,6 +21,7 @@ class Board
 	int numRedJewel;
 	int numApple;
 	int point;
+	int life;
 	string FillNumber(string s, UINT MaxNumber);
 public:
 	Board();

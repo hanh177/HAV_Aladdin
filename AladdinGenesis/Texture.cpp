@@ -65,6 +65,7 @@ void CTexture::LoadTexTure()
 	Add(Type::GUARDS, "Resources/Enemy/Guards.png", D3DCOLOR_XRGB(120, 193,152));
 	Add(Type::DIE, "Resources/Enemy/Razoul.png", D3DCOLOR_XRGB(186,254,202));
 	Add(Type::SKELETON_IMAGE, "Resources/Enemy/Skeleton.png", D3DCOLOR_XRGB(255, 0, 255));
+	Add(Type::BOSS_TEX, "Resources/Enemy/Boss.png", D3DCOLOR_XRGB(186, 254, 202));
 
 	//Map
 	Add(Type::Map1, "Resources/Map/map1_tileSet.png");
@@ -79,6 +80,10 @@ void CTexture::LoadTexTure()
 	Add(Type::Map10, "Resources/Map/map10_tileSet.png");
 	Add(Type::Map_Object, "Resources/Map/MapObject.png", D3DCOLOR_XRGB(163,73,164));
 	Add(Type::MapBoss, "Resources/Map/mapboss_tileSet.png");
+	Add(Type::MapBoss2, "Resources/Map/mapboss2_tileSet.png");
+	Add(Type::BossBackGround, "Resources/Map/bossBackGround.png");
+	Add(Type::BACKGROUNDINTRO, "Resources/Object/BackGroundIntro.png");
+	Add(Type::BIRDINTRO, "Resources/Object/BirdIntro.png", D3DCOLOR_XRGB(84, 109, 142));
 
 	//Bbox
 	Add(Type::BOX, "Resources/Object/bbox.png");

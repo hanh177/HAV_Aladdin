@@ -1,15 +1,16 @@
 #include "Bone.h"
 #include "Aladin.h"
+#include "Sound.h"
 
 Bone::Bone(float x, float y, float vx, float vy,int state)
 {
-	this->x = x;
-	this->y = y;
-	this->vx = vx;
-	this->vy = vy;
+	this->x=this->x0 = x;
+	this->y =this->y0= y;
+	this->vx =vx0= vx;
+	this->vy = vy0=vy;
 	this->type = Type::BONE;
 	this->health = 1;
-	this->state = state;
+	this->state =state0 =state;
 	isFinished = false;
 	LoadResources();
 }
@@ -79,7 +80,6 @@ void Bone::Render()
 
 void Bone::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-
 	if (health == 0)
 		if (!isFinished)
 		{
@@ -96,6 +96,7 @@ void Bone::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		CollisWithObj(coObjects);
 		if (GetTickCount() - Aladin::GetInstance()->GetUntouchableTime() >= ALADIN_BEINGHURT_TIME)
 			CollisWithAladin();
+		Sound::GetInstance()->Play(eSound::sound_BonesTinkle);
 	}
 }
 
@@ -198,12 +199,16 @@ void Bone::GetBoundingBox(float & left, float & top, float & right, float & bott
 	}
 }
 
-void Bone::ModifyPositionFitSkeleton()
+void Bone::Revival()
 {
-}
-
-void Bone::SetState(int x)
-{
+	this->x = this->x0;
+	this->y = this->y0;
+	this->vx = vx0;
+	this->vy = vy0;
+	this->health = 1;
+	this->state = state0;
+	isFinished = false;
+	animations[3]->SetCurrentFrame();
 }
 
 Bone::~Bone()

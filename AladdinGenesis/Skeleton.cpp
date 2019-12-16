@@ -1,14 +1,16 @@
 ﻿#include "Skeleton.h"
 #include "Aladin.h"
+#include "Sound.h"
 
 Skeleton::Skeleton(float x, float y, int direction)
 {
-	this->x = x;
-	this->y = y;
+	this->x=this->x0 = x;
+	this->y =this->y0= y;
 	this->nx = direction;
 	this->health = 1;
 	this->type = Type::SKELETON;
 	float tmp = 0;
+	state = 0;
 	LoadBone();
 	LoadResources();
 }
@@ -28,7 +30,7 @@ void Skeleton::LoadResources()
 
 	//nam yen
 	ani = new CAnimation(115);
-	sprites->Add(0, 0,120,0,120, tex);
+	sprites->Add(0, 0,0,120,120, tex);
 
 	ani->Add(0);
 	animations->Add(100,ani);
@@ -37,7 +39,7 @@ void Skeleton::LoadResources()
 	//đứng dậy
 	file.open("Resources/Enemy/SkeletonStandUp.txt");
 	file >> n;//18
-	ani = new CAnimation(100);
+	ani = new CAnimation(50);
 	for (int i = 0; i < n; i++)
 	{
 		file >> id >> left >> top >> right >> bottom;
@@ -105,7 +107,6 @@ void Skeleton::Render()
 	{
 		if(health>0)
 			RenderBoundingBox(0,0);
-
 	}
 }
 
@@ -125,18 +126,11 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (animations[3]->GetCurrentFrame() == 7)
 			{
 				isFinished = true;
-				Aladin::GetInstance()->PlusPoint(40);
+				Aladin::GetInstance()->PlusPoint(100);
 			}
 		}
 		else
 			return;
-		
-	}
-	else if (isDestroy)//truong hop no
-	{
-		for (auto x : listBone)
-			x->Update(dt,coObjects);
-		return;
 	}
 	else//binh thuong
 	{
@@ -144,8 +138,7 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 		if (abs(tmpX - this->x) <= ACTIVATE_ZONE && abs(tmpY - this->y) <= ACTIVATE_ZONE_Y)
 		{
-			state = 1;
-			
+			state = 1;			
 			if (isReset)
 			{
 				isReset = false;
@@ -156,16 +149,36 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				state = 2;
 				dem++;
 				DebugOut(L"D", NULL);
-				if (dem >= 25)
+				if (dem >= 20)
 				{
+					Sound::GetInstance()->Play(eSound::sound_Skeleton);
 					this->isDestroy = true;
-				
+					isBeingHurt = 1;
+					this->health = 0;
 				}
 			}
 		}
 		else
 			state = 0;
 	}
+}
+
+void Skeleton::Revival()
+{
+	state = 0;
+	isDestroy = false;
+	dem = 0;
+	this->health = 1;
+	isReset = true;
+	this->x = x0;
+	this->y = y0;
+	isFinished = false;
+	for (int i = 0; i < listBone.size(); i++)
+		listBone.at(i)->Revival();
+	animations[1]->SetCurrentFrame();
+	animations[3]->SetCurrentFrame();
+	isBeingHurt = -1;
+
 }
 
 void Skeleton::GetBoundingBox(float & left, float & top, float & right, float & bottom)

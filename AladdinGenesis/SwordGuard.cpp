@@ -1,5 +1,6 @@
 #include "SwordGuard.h"
 #include "Aladin.h"
+#include "Sound.h"
 
 SwordGuard::SwordGuard(int toX1,int toX2,int toY)
 {
@@ -30,6 +31,8 @@ void SwordGuard::Render()
 
 void SwordGuard::Update(DWORD dt,float x, float y,int nx,int state)
 {
+	float tmpX, tmpY;
+	Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 	if (state == 5)
 		return;
 	this->x = x;
@@ -40,10 +43,13 @@ void SwordGuard::Update(DWORD dt,float x, float y,int nx,int state)
 	if (isFinished)
 	{
 		isFinished = false;
+		if (abs(tmpX - this->x) <= 192 && abs(tmpY - this->y) <= 96&&state==3)
+			Sound::GetInstance()->Play(eSound::sound_HighSword);
 		dem++;
 	}
 	else
 	{
+	
 		if (dem > 30)
 		{
 			isFinished = true;

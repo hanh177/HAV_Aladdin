@@ -4,6 +4,15 @@
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
+#ifndef SAFE_DELETE
+#define SAFE_DELETE(ptr) \
+if(ptr) \
+{\
+	delete (ptr); \
+	ptr = nullptr; \
+} \
+
+#endif
 enum Type
 {
 	ALADDIN=-1,
@@ -41,6 +50,13 @@ enum Type
 	SCENEGAME=42,
 	SCENEDIE=43,
 	SCENEOVER=44,
+	BOSS=45,
+	BOSS_TEX=46,
+	SNAKE=47,
+	SCENEWIN=48,
+	BACKGROUNDINTRO=49,
+	BIRDINTRO=50,
+
 
 	//Map tu 100
 	Map1 = 100,
@@ -115,11 +131,21 @@ enum Type
 	Map10_Y = 896,
 
 	MapBoss=1100,
-	MapBoss_Rows=26,
-	MapBoss_Columns=14,
-	MapBoss_Tile=346,
+	MapBoss_Rows=7,
+	MapBoss_Columns=26,
+	MapBoss_Tile=147,
 	MapBoss_X=0,
 	MapBoss_Y=0,
+
+
+	MapBoss2 = 1200,
+	MapBoss2_Rows = 7,
+	MapBoss2_Columns = 26,
+	MapBoss2_Tile = 141,
+	MapBoss2_X = 0,
+	MapBoss2_Y = 224,
+
+	BossBackGround=1300,
 	//MapObject
 	Map_Object = 10000
 };

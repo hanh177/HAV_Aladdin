@@ -35,14 +35,17 @@ void Board::Render()
 	mFont->Draw(220, 190, FillNumber(std::to_string(this->numRedJewel),2));
 	mFont->Draw(260, 190, FillNumber(std::to_string(this->numApple), 2));
 	mFont->Draw(220, 50, FillNumber(std::to_string(this->point), 6));
+	mFont->Draw(16, 180, FillNumber(std::to_string(this->life), 2));
 }
 
 void Board::Update()
 {
-	this->aladinHealth= Aladin::GetInstance()->GetHealth();
-	numRedJewel = Aladin::GetInstance()->GetNumRedJewel();
-	numApple = Aladin::GetInstance()->GetNumApple();
-	point = Aladin::GetInstance()->GetPoint();
+	Aladin *mAladin = Aladin::GetInstance();
+	this->aladinHealth= mAladin->GetHealth();
+	numRedJewel = mAladin->GetNumRedJewel();
+	numApple = mAladin->GetNumApple();
+	point = mAladin->GetPoint();
+	life = mAladin->GetLife();
 }
 
 void Board::LoadAni()

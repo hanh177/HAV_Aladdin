@@ -136,6 +136,18 @@
     <Filter Include="Object\Weapon\Bone">
       <UniqueIdentifier>{48cfc753-1043-4f93-afbf-bf65b4628d8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Enemy\Boss">
+      <UniqueIdentifier>{160b1a90-1884-45f1-a285-f9faa9da0aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\SwirlFire">
+      <UniqueIdentifier>{5884141f-69ce-4d52-b780-d8557f0cbec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon\Fire">
+      <UniqueIdentifier>{bcf9d9da-6a74-4922-89bb-e053d97b5cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Sound">
+      <UniqueIdentifier>{2cb914b2-4c6d-408c-ae41-4ceb2d1f6b43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -270,6 +282,33 @@
     <ClCompile Include="SceneBoss.cpp">
       <Filter>Scenes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SwirlFire.cpp">
+      <Filter>Object\Weapon\SwirlFire</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Object\Weapon\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWin.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DSutil.cpp">
+      <Filter>GameComponents\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="dxutil.cpp">
+      <Filter>GameComponents\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>GameComponents\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -399,6 +438,33 @@
       <Filter>Scenes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneBoss.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SwirlFire.h">
+      <Filter>Object\Weapon\SwirlFire</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Object\Weapon\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWin.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DSutil.h">
+      <Filter>GameComponents\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="dxutil.h">
+      <Filter>GameComponents\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>GameComponents\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
       <Filter>Scenes\Scene</Filter>
     </ClInclude>
   </ItemGroup>

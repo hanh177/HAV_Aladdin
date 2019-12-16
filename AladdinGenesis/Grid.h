@@ -43,6 +43,7 @@ public:
 	GameObject *NewObject(int id, int type, int direction, int width, int height, float x, float y,int state);
 	void ReadMatrixGrid(int row, int column,vector<int> &);
 	void FindObjInMatrix(int &, int &);
+	void Revival(vector<GameObject *> listObj);
 	void ListObject(vector<GameObject *> &listObj);//tra ve list object dang thuoc trong camera
 	static Grid *GetInstance();
 	~Grid();

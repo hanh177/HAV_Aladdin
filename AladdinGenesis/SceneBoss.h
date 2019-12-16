@@ -8,6 +8,8 @@
 #include"Grid.h"
 #include"MapObject.h"
 #include "Board.h"
+#include "Boss.h"
+#include "SceneWin.h"
 
 
 #define ALADIN_NORMAL 1
@@ -17,12 +19,13 @@ class SceneBoss :public Scene
 {
 
 	Aladin *mAladin;
-	GameMap *mMapBoss;
+	GameMap *mMapBoss, *mMapBoss2;
 	Camera *mCamera;
 	Grid *mGrid;
 	Board *mBoard;
 	bool isRunning;
 	DWORD  time;
+	Boss *mBoss;
 
 
 	vector<LPGAMEOBJECT> listObj;

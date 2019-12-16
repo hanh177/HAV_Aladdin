@@ -1,11 +1,14 @@
 #include"Apple.h"
+#include "Sound.h"
 
 Apple::Apple()
 {
 	this->vx = 0.4f;
 	this->vy = -0.15f;
 	this->type = Type::APPLE;
+	this->health = 1;
 	this->x = this->y = 0;
+	isFinished = false;
 	LoadResources();
 }
 
@@ -60,16 +63,10 @@ void Apple::Attach()
 
 void Apple::Render()
 {	
-	if (state == 0)
-	{
-		animations[state]->Render(x, y, 1, 1, Camera::GetInstance()->GetTranform());
-		animations[1]->SetCurrentFrame();
-	}
-	else
-	{
-		if (animations[state]->GetCurrentFrame() < 4)
-			animations[state]->Render(x, y, 1, 1, Camera::GetInstance()->GetTranform());	
-	}
+	if (this->health <= 0 && isFinished == true) return;
+	if(state==1)
+		animations[0]->SetCurrentFrame();
+	animations[state]->Render(x, y, 1, 1, Camera::GetInstance()->GetTranform());
 
 	if (DISPLAY_BOX == 1)
 	{
@@ -88,15 +85,23 @@ void Apple::SetPosition(float x, float y, int nx)
 
 void Apple::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	GameObject::Update(dt, coObjects);
-	vy += 0.0012*dt;
-	if (state == 0)
-		CollisionWithEnemy(coObjects);
-	CollisionWithStaticObj(coObjects);
-	if (!isFinish)
+	if(this->health<=0)
+		if (!isFinished)
+		{
+			state = 1;
+			if (animations[1]->GetCurrentFrame() == 4)
+				isFinished = true;
+		}
+		else return;
+	else {
+		GameObject::Update(dt, coObjects);
 		state = 0;
-	else
-		state = 1;
+		vy += 0.0012*dt;
+		if (state == 0)
+			CollisionWithEnemy(coObjects);
+		CollisionWithStaticObj(coObjects);
+	}
+	
 }
 
 void Apple::CollisionWithStaticObj(vector<LPGAMEOBJECT>* coObjects)
@@ -135,10 +140,11 @@ void Apple::CollisionWithStaticObj(vector<LPGAMEOBJECT>* coObjects)
 		//xet logic va cham voi brick
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
-			isFinish = true;
 			dy = 0;
 			vy = 0;
 			dx = 0;
+			Sound::GetInstance()->Play(eSound::sound_AppleSplat);
+			this->health = 0;
 		}
 	}
 }
@@ -157,7 +163,8 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 	listEnemy.clear();
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
-		if ((coObjects->at(i)->GetType() == Type::BAT|| coObjects->at(i)->GetType()==Type::GUARD|| coObjects->at(i)->GetType() == Type::MONKEY|| coObjects->at(i)->GetType() == Type::SKELETON)&& coObjects->at(i)->GetHealth()!=0)
+		if ((coObjects->at(i)->GetType() == Type::BAT|| coObjects->at(i)->GetType()==Type::GUARD|| coObjects->at(i)->GetType() == Type::MONKEY|| coObjects->at(i)->GetType() == Type::SKELETON|| coObjects->at(i)->GetType() == Type::BOSS)
+			&& coObjects->at(i)->GetHealth()!=0)
 		{
 			listEnemy.push_back(coObjects->at(i));
 		}
@@ -167,6 +174,20 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 
 	if (coEvents.size() == 0)
 	{
+		for (int i = 0; i < listEnemy.size(); i++)
+		{
+			LPGAMEOBJECT e = listEnemy.at(i);
+			if (e->GetType() == Type::BOSS)
+			{
+				if (AABBcollision(e))
+				{
+					e->SubHealth();
+					dy = 0;
+					vy = 0;
+					this->health = 0;
+				}
+			}
+		}
 	}
 	else
 	{
@@ -179,18 +200,30 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 			LPGAMEOBJECT e = coEventsResult.at(i)->obj;
 			if (e->GetType() == Type::GUARD|| e->GetType() == Type::MONKEY)
 			{
+				Sound::GetInstance()->Play(eSound::sound_GuardHit);
 				e->SubHealth(2);
 				e->SetIsBeingHurt(1);
-				DebugOut(L"S", NULL);
+			}
+			else if (e->GetType() == Type::SKELETON) {
+
+				Sound::GetInstance()->Play(eSound::sound_Skeleton);
+				e->SubHealth();
+				e->SetIsBeingHurt(1);
+			}
+			else if (e->GetType() == Type::MONKEY) {
+
+				Sound::GetInstance()->Play(eSound::sound_Iiee);
+				e->SubHealth();
+				e->SetIsBeingHurt(1);
 			}
 			else
 			{
 				e->SubHealth();
 				e->SetIsBeingHurt(1);
 			}
-			isFinish = true;
 			dy = 0;
 			vy = 0;
+			this->health = 0;
 		}
 	}
 
@@ -204,6 +237,12 @@ void Apple::GetBoundingBox(float & left, float & top, float & right, float & bot
 	bottom = top + 8;
 }
 
+void Apple::Revival()
+{
+	animations[1]->SetCurrentFrame();
+	isFinished = false;
+	this->health = 1;
+}
 Apple::~Apple()
 {
 }

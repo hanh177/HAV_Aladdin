@@ -109,7 +109,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (animations[2]->GetCurrentFrame()== 7)
 			{
 				isFinished = true;
-				Aladin::GetInstance()->PlusPoint(20);
+				Aladin::GetInstance()->PlusPoint(100);
 			}
 			
 		}
@@ -141,7 +141,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				state = 0;
 				this->x = x0;
 				this->y = y0;
-				if (dem >= 30)
+				if (dem >= 45)
 				{
 					dem = 0;
 					stateMoving = 1;
@@ -150,7 +150,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			case 1://di sang trai
 				dem++;
 				vx = -0.1f;
-				if (dem >= 20)
+				if (dem >= 35)
 				{
 					stateMoving = 2;
 					dem = 0;
@@ -160,7 +160,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem++;
 				vy = 0.1f;
 				vx = -0.05f;
-				if (dem >= 30)
+				if (dem >= 45)
 				{
 					stateMoving = 3;
 					dem = 0;
@@ -171,7 +171,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem++;
 				vy = 0.05f;
 				vx = 0.05f;
-				if (dem >= 45)
+				if (dem >= 60)
 				{
 					dem = 0;
 					stateMoving = 4;
@@ -182,7 +182,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem++;
 				vx = 0.08f;
 				vy = -0.04f;
-				if (dem >= 50)
+				if (dem >= 65)
 				{
 					dem = 0;
 					stateMoving = 5;
@@ -193,7 +193,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem++;
 				vx = -0.03f;
 				vy = -0.07f;
-				if (dem >= 40)
+				if (dem >= 55)
 				{
 					dem = 0;
 					stateMoving = 6;
@@ -204,7 +204,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem++;
 				vx = -0.1f;
 				vy = 0;
-				if (dem >= 20)
+				if (dem >= 35)
 				{
 					dem = 0;
 					stateMoving = 0;
@@ -229,6 +229,18 @@ void Bat::GetBoundingBox(float & left, float & top, float & right, float & botto
 
 void Bat::SubHealth(int th)
 {
+}
+
+void Bat::Revival()
+{
+	this->x = x0;
+	this->y = y0;
+	this->health = 1;
+	dem = 0;
+	state = 0;
+	isFinished = false;
+	isSet = true;
+	animations[2]->SetCurrentFrame();
 }
 
 Bat::~Bat()

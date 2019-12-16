@@ -18,8 +18,8 @@ using namespace std;
 
 class Apple : public Weapon
 {
-	bool isFinish;
-	int state, demSubGuard=-1;
+	bool isFinish, isplay;
+	int state, demSubGuard = -1;
 public:
 	Apple();
 	void LoadResources();
@@ -40,5 +40,6 @@ public:
 	void CollisionWithStaticObj(vector<LPGAMEOBJECT>* coObjects);
 	void CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
+	void Revival();
 	~Apple();
 };

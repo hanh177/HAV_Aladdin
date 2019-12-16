@@ -26,6 +26,7 @@ public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	void CollisWithWall(vector<LPGAMEOBJECT> *coObjects);
 	void GetBoundingBox(float & left, float & top, float & right, float & bottom);
+	void Revival();
 	~Monkey();
 
 };

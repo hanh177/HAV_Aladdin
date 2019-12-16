@@ -1,5 +1,6 @@
 ﻿#include "SceneBoss.h"
 #include "define.h"
+#include "Sound.h"
 
 SceneBoss::SceneBoss()
 {
@@ -12,6 +13,7 @@ SceneBoss::SceneBoss(int state)
 	this->mEvent = ALADIN_NORMAL;
 	mCamera = Camera::GetInstance();
 	mBoard = Board::GetInstance();
+	mBoss = Boss::GetInstance();
 	LoadResources();
 }
 
@@ -24,6 +26,7 @@ SceneBoss::~SceneBoss()
 void SceneBoss::LoadResources()
 {
 	mMapBoss = new GameMap(MapBoss, "Resources/Map/mapboss_matrix.txt");
+	mMapBoss2 = new GameMap(MapBoss2, "Resources/Map/mapboss2_matrix.txt");
 	int id, type, direction, width, height, n, state;
 	float x, y;
 
@@ -35,8 +38,11 @@ void SceneBoss::LoadResources()
 		file >> id >> type >> direction >> width >> height >> x >> y >> state;
 		AddObject(id, type, direction, width, height, x, y, state);
 	}
+	listObj.push_back(mBoss);
 	mCamera->SetTypeMap(MapBoss);
-	mAladin->SetPosition(47, 272);
+	mAladin->SetPosition(47, 300);
+	mAladin->SetRestartPoint(D3DXVECTOR2(47, 300));
+	Sound::GetInstance()->Play(eSound::sound_BossTune);
 }
 
 void SceneBoss::SetEvent(int mEvent)
@@ -50,11 +56,18 @@ void SceneBoss::Render()
 	switch (mEvent)
 	{
 	case ALADIN_NORMAL:
+		CSprites::GetInstance()->Add(BossBackGround, 0, 0, 830, 450, CTexture::GetInstance()->Get(BossBackGround));
+		CSprites::GetInstance()->Get(BossBackGround)->Draw(0,0,0,D3DXVECTOR2(0,0),0);
 		mMapBoss->Draw(MapBoss);
+		mMapBoss2->Draw(MapBoss2);
 		for (auto x : listObj)
 			x->Render();
+		mBoss->Render();
 		mAladin->Render();
 		mBoard->Render();
+		break;
+	case ALADIN_DIE:
+		mAladin->Render();
 		break;
 	}
 }
@@ -64,6 +77,7 @@ void SceneBoss::Update(DWORD dt)
 	switch (mEvent)
 	{
 	case ALADIN_NORMAL:
+		Sound::GetInstance()->Play(eSound::sound_BossTune);
 		mBoard->Update();
 		for (auto x : listObj)
 			x->Update(dt, &listObj);
@@ -75,8 +89,14 @@ void SceneBoss::Update(DWORD dt)
 			mAladin->SetState(ALADIN_IDLE_STATE);
 		}
 		mAladin->Update(dt, &listObj);
+		if (mBoss->GetHealth() <= 0)
+		{
+			Sound::GetInstance()->StopAll();
+			SceneManager::GetInstance()->SetScene(new SceneWin());
+		}
 		break;
 	case ALADIN_DIE:
+		Sound::GetInstance()->StopAll();
 		mAladin->Update(dt, &listObj);
 		break;
 	}
@@ -192,7 +212,7 @@ void SceneBoss::OnKeyDown(int KeyCode)
 		mAladin->SetHealth(8);
 		break;
 	case DIK_S:
-		mAladin->SetHealth(-1);
+		mBoss->SetHealth(-1);
 		break;
 	case DIK_D:
 		mAladin->SetNumApple();
@@ -210,6 +230,9 @@ GameObject* SceneBoss::NewObject(int id, int type, int direction, int width, int
 	{
 	case BRICK:
 		return new Brick(x, y, width, height);
+		break;
+	case WALL:
+		return new Wall(x, y, width, height);
 		break;
 	}
 }

@@ -9,13 +9,15 @@
 #include "Camera.h"
 class SceneIntro :public Scene
 {
-	bool isPressedKey;
+	bool isPressedKey, isRenderBird;
 	DWORD TimeBling;
 
 	DWORD TimeBetweenBling;
 	Font *mFont;
 	bool isDrawStartFont;
 	vector<LPANIMATION> animations;
+	int state = 0;
+	int x = 160, y = 0;
 public:
 	SceneIntro();
 	~SceneIntro();

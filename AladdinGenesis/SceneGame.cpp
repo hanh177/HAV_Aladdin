@@ -1,5 +1,6 @@
 ﻿#include"SceneGame.h"
 #include "define.h"
+#include "Sound.h"
 
 SceneGame::SceneGame()
 {
@@ -16,6 +17,7 @@ SceneGame::SceneGame(int state)
 	mGrid = Grid::GetInstance();
 	mBoard = Board::GetInstance();
 	mGrid->Clear();
+	mSound = new Sound();
 	LoadResources();
 	
 
@@ -43,6 +45,7 @@ void SceneGame::LoadResources()
 	xTrans = 2210;
 	mAladin->SetPosition(/*113,991*//*480,606*/ 1951,131);
 	mGrid->SetGridPath("Resources/Object/Object.txt");
+	Sound::GetInstance()->Play(eSound::sound_Story);
 	
 }
 
@@ -89,6 +92,7 @@ void SceneGame::Update(DWORD dt)
 	case ALADIN_NORMAL:
 		if (!isTransitionScene)
 		{
+			Sound::GetInstance()->Play(eSound::sound_Story);
 			mGrid->ListObject(obj);
 			mBoard->Update();
 			for (auto x : obj)
@@ -101,6 +105,7 @@ void SceneGame::Update(DWORD dt)
 				mAladin->getRestartPoint(x, y);
 				mAladin->SetPosition(x, y);
 				mAladin->SetState(ALADIN_IDLE_STATE);
+				mGrid->Revival(obj);
 			}
 			mAladin->Update(dt, &obj);
 			if (mAladin->GetPosX() >= xTrans&&mAladin->GetPosY()<=175)
@@ -108,11 +113,16 @@ void SceneGame::Update(DWORD dt)
 		}
 		else
 		{
+			Sound::GetInstance()->StopAll();
 			SceneManager::GetInstance()->SetScene(new SceneBoss(2));
 		}
 		break;
 	case ALADIN_DIE:
-		mAladin->Update(dt, &obj);
+		if(mAladin->GetLife()<0)
+			SceneManager::GetInstance()->SetScene(new SceneGameOver());
+		else
+			mAladin->Update(dt, &obj);
+		Sound::GetInstance()->StopAll();
 		break;
 	}
 	
@@ -227,9 +237,9 @@ void SceneGame::OnKeyDown(int KeyCode)
 	case DIK_F:
 		mAladin->SetHealth(8);
 		break;
-	case DIK_S:
+	/*case DIK_S:
 		mAladin->SetHealth(-1);
-		break;
+		break;*/
 	case DIK_D:
 		mAladin->SetNumApple();
 		break;

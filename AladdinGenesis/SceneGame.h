@@ -1,6 +1,6 @@
 #pragma once
 #include"Scene.h"
-#include"CGame.h"
+//#include"CGame.h"
 #include "Aladin.h"
 #include "GameMap.h"
 #include "Camera.h"
@@ -9,6 +9,8 @@
 #include"MapObject.h"
 #include "Board.h"
 #include "SceneBoss.h"
+#include "Sound.h"
+#include "SceneGameOver.h"
 
 
 #define ALADIN_NORMAL 1
@@ -28,7 +30,7 @@ class SceneGame :public Scene
 	DWORD  time;
 	bool isTransitionScene;
 	float xTrans, yTrans;
-
+	Sound *mSound;
 	vector<LPGAMEOBJECT> obj;
 public:
 	SceneGame();

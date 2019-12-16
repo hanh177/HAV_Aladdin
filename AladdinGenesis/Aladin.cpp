@@ -1,4 +1,5 @@
 ﻿#include"Aladin.h"
+#include"Sound.h"
 
 
 Aladin *Aladin::_instance = NULL;
@@ -477,7 +478,7 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		CollisionWithBrick(coObject);
 
 		//Kich hoat, update va render vu khi
-		if (isAttachApple)
+		if (isAttachApple&&!isBeingHurt)
 		{
 			if (numApple > 0)
 			{
@@ -508,6 +509,7 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		}
 		if (animations[ALADIN_ANI_DEATH]->GetCurrentFrame() == 33)
 		{
+			life--;
 			health = 8;
 			SceneManager::GetInstance()->SetEvent(1);
 			
@@ -677,6 +679,7 @@ void Aladin::Render()
 			case 25:
 				DebugOut(L"A", NULL);
 				ani_ID = ALADIN_ANI_PUSHING;
+				Sound::GetInstance()->Play(eSound::sound_AladinPush);
 				formSize = 2;
 				break;
 			default:
@@ -684,7 +687,7 @@ void Aladin::Render()
 				ani_ID = ALADIN_ANI_RUNNING;
 				if (isCollisWithWall)
 				{
-					//DebugOut(L"A", NULL);
+					Sound::GetInstance()->Play(eSound::sound_AladinPush);
 					ani_ID = ALADIN_ANI_PUSHING;
 					formSize = 2;
 					isPushing = true;
@@ -730,9 +733,7 @@ void Aladin::Render()
 					index = 0;
 				break;
 
-			case 17://chạy và tấn công(có trạng thái 17 ở đây là vì nó có thể vừa chạy vừa nhảy và tấn công,
-				//khi này vx và vy nó đang khác 0 nên k cần quan tâm nó có phải trạng thái chạy hoặc nhảy hay k
-				//vì khi rơi vào trạng thái này thì nó đang di chuyển cả theo Ox và Oy
+			case 17:
 				ani_ID = ALADIN_ANI_ATTACKING3;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -782,6 +783,15 @@ void Aladin::Render()
 					isResetFrame = true;
 				}
 				break;
+
+			case 26://chạy và ném táo
+				ani_ID = ALADIN_ANI_ATTACKAPPLE4;
+				if (GetFrame(ani_ID) == 5)
+				{
+					isResetFrame = true;
+					index = 0;
+				}
+				break;
 			default:
 				ani_ID = ALADIN_ANI_JUMPPING;
 				index = 0;
@@ -825,19 +835,10 @@ void Aladin::Render()
 
 		float finalX = x + toX, finalY = y + 52 + toY;
 		if (!isClimbing)
-		{
-			if (climbing != -1)
-			{
-				finalX += X;
-				/*DebugOut(L"Y", NULL);*/
-			}
-		}
-		else
-		{
-			finalX += X;
-		}
+			if (climbing != -1)	finalX += X;
+		else finalX += X;
 		animations[ani_ID]->Render(finalX, finalY, loop, this->nx, Camera::GetInstance()->GetTranform(), formSize, alpha);
-		if (isAttachApple)
+		if (isAttachApple&&!isBeingHurt)
 		{
 			if (numApple > 0)
 				mApple->Render();
@@ -880,10 +881,12 @@ void Aladin::SetState(int state)
 	{
 	case ALADIN_IDLE_STATE:
 		isSit = isFaceUp=isPushing=false;
-		vx = 0;
-		if (!isBusy)//không làm bất cứ hành động nào khác thì có thể nhàn rỗi và đứng yên
+		if(isResetVx)
+			vx = 0;
+		if (index == 14)
+			currentState = 14;
+		if (!isBusy)
 		{
-			//DebugOut(L"B", NULL);
 			currentState = 1;
 			isAttacking = false;
 			isSitAttach = false;
@@ -991,9 +994,7 @@ void Aladin::SetState(int state)
 				isJumpOnRope = true;
 				climbing = -1;
 				isBusy = false;
-			}
-			
-				
+			}	
 		break;
 		
 	case ALADIN_ATTACKING_STATE:
@@ -1034,6 +1035,7 @@ void Aladin::SetState(int state)
 			currentState = 23;//tấn công khi đang leo dây
 		isBusy = true;
 		isAttacking = true;
+		Sound::GetInstance()->Play(eSound::sound_HighSword);
 		if (isResetFrame)//set về frame bắt đầu=0 để tăng độ chính xác
 		{
 			isResetFrame = false;
@@ -1058,9 +1060,9 @@ void Aladin::SetState(int state)
 			}
 			else if (vx != 0)
 			{
+				DebugOut(L"A", NULL);
 				currentState = 26;//chạy và ném táo
 				index = 26;
-
 			}
 			else
 				currentState = 11;
@@ -1078,6 +1080,8 @@ void Aladin::SetState(int state)
 			currentState = 24;//tấn công khi đang leo
 		isBusy = true;
 		isFinish = false;
+		mApple->Revival();
+		Sound::GetInstance()->Play(eSound::sound_ThrowApple);
 		if (isResetFrame)
 		{
 			isResetFrame = false;
@@ -1094,8 +1098,7 @@ void Aladin::SetState(int state)
 		{
 			if (isCollisWithBrick)
 				isJumpOnRope = false;
-			vx = ALADIN_WALKING_SPEED;
-			
+			vx = ALADIN_WALKING_SPEED * changeVx;
 			if (isCollisWithWall)
 			{
 				currentState = 25;
@@ -1144,7 +1147,7 @@ void Aladin::SetState(int state)
 	case ALADIN_WALKING_LEFT_STATE:
 		if (climbing == -1)
 		{
-			vx = -ALADIN_WALKING_SPEED;
+			vx = -ALADIN_WALKING_SPEED * changeVx;
 			if(isCollisWithBrick)
 				isJumpOnRope = false;
 			if (isClimbing)
@@ -1314,7 +1317,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				}
 				if (e->ny == -1)//dang di xuong
 				{
- 					y += min_ty * dy + ny * 0.4f;
+ 					//y += min_ty * dy + ny * 0.4f;
 					if (ny != 0)
 					{
 						vy = 0;
@@ -1342,7 +1345,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				}
 				if (e->ny == -1)
 				{
-					y += min_ty * dy + ny * 0.4f;
+					//y += min_ty * dy + ny * 0.4f;
 					if (ny != 0)
 					{
 						vy = 0;
@@ -1497,6 +1500,7 @@ void Aladin::CollisionWithItems(vector<LPGAMEOBJECT>* coObject)
 					restartPoint.x = rX;
 					restartPoint.y = rY - 25;
 					idRestartPoint = e->GetID();
+					Sound::GetInstance()->Play(eSound::sound_ContinuePoint);
 				}
 
 			}
@@ -1517,15 +1521,26 @@ void Aladin::CollisionWithItems(vector<LPGAMEOBJECT>* coObject)
 					health = 8;
 			}
 			else if (item->GetType() == Type::REDJEWEL)
+			{
 				AddRedJewel();
+				Sound::GetInstance()->Play(eSound::sound_GemCollect);
+			}
 			else if (item->GetType() == Type::APPLEITEM)
+			{
 				AddApple();
+				Sound::GetInstance()->Play(eSound::sound_AppleCollect);
+			}
+				
 			else if (item->GetType() == Type::RESTARTPOINT)
 			{
+				Sound::GetInstance()->Play(eSound::sound_ContinuePoint);
 				item->GetPosition(rX, rY);
 				restartPoint.x = rX;
 				restartPoint.y = rY - 25;
 				idRestartPoint = item->GetID();
+			}
+			else if (item->GetType() == Type::GENIE) {
+				Sound::GetInstance()->Play(eSound::sound_Wow);
 			}
 
 			item->SubHealth();

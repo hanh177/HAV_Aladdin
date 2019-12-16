@@ -12,7 +12,7 @@ void Camera::SetTypeMap(Type type_Map)
 		this->type = Map1;
 		break;
 	case MapBoss:
-		this->type = Map2;
+		this->type = MapBoss;
 	}
 }
 
@@ -87,7 +87,8 @@ void Camera::SetPosition(D3DXVECTOR3 pos)
 	}
 	else
 	{
-
+		if (pos.x >= 686)
+			pos.x = 686;
 	}
 	mPosition = pos;
 

@@ -262,6 +262,20 @@ void Grid::FindObjInMatrix(int &i, int &j)
 {
 
 }
+void Grid::Revival(vector<GameObject*> listObj)
+{
+	for (int i = 0; i < MAX_GRID_ROW; i++)
+	{
+		for (int j = 0; j < MAX_GRID_COLUMN; j++)
+		{
+			for (int k = 0; k < cells[i][j].size(); k++)
+			{
+				if (cells[i][j].at(k)->GetHealth() <= 0)
+					cells[i][j].at(k)->Revival();
+			}
+		}
+	}
+}
 Grid::~Grid()
 {
 

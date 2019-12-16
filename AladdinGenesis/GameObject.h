@@ -121,6 +121,7 @@ public:
 	virtual float GetVx() { return vx; }
 	virtual void LoadAni();
 	virtual void Reset();
+	virtual void Revival();
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 
 	

@@ -1,4 +1,6 @@
 #include "MovingBrick.h"
+#include "Sound.h"
+#include"Aladin.h"
 
 MovingBrick::MovingBrick(float x, float y, int width, int height,int state)
 {
@@ -100,9 +102,13 @@ void MovingBrick::Render()
 
 void MovingBrick::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+	float tmpX, tmpY;
+	Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 		switch (mState)
 		{
 		case 0://di ra
+			if(abs(tmpX-this->x)<=160&&abs(tmpY-this->y)<=96)
+				Sound::GetInstance()->Play(eSound::sound_StoneRumble);
 			if (animations[0]->GetCurrentFrame() == 4)
 			{
 				dem = 0;

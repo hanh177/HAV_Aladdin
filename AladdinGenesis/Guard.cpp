@@ -1,14 +1,13 @@
 #include "Guard.h"
 #include "Aladin.h"
+#include "Sound.h"
 
 Guard::Guard(float x, float y,int direction)
 {
 	this->health = 4;
 	this->type = Type::GUARD;
-	this->x = x;
-	this->y = y;
-	this->x0 = x;
-	this->y0 = y;
+	this->x=this->x0 = x;
+	this->y0=this->y = y;
 	this->nx = direction;
 	mSwordGuard = new SwordGuard(24,64,5);
 	isFinished = false;
@@ -170,6 +169,8 @@ void Guard::Render()
 
 void Guard::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+	float tmpX, tmpY;
+	Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 	if (this->health <= 0)
 		if (!isFinished)
 		{
@@ -178,17 +179,16 @@ void Guard::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (animations[5]->GetCurrentFrame() == 7)
 			{
 				isFinished = true;
-				Aladin::GetInstance()->PlusPoint(40);
+				Aladin::GetInstance()->PlusPoint(200);
 			}
 		}
 		else
 			return;
 	else
 	{
-		float tmpX, tmpY;
-		Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 		if (abs(tmpX - this->x0) <= ACTIVATE_ZONE && abs(tmpY - this->y0) <= 50)
 		{
+			dem = 0;
 			isActivated = true;
 			state = 1;
 			vx = (tmpX - this->x) / (80 * dt);
@@ -201,7 +201,6 @@ void Guard::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				vx = 0;
 				state = 3;
 			}
-
 		}
 		else
 		{
@@ -220,8 +219,11 @@ void Guard::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			else
 			{
+				dem++;
 				state = 0;//dung doi
 				vx = 0;
+				if (abs(tmpX - this->x) <= 192 && abs(tmpY - this->y) <= 96&&dem%10==0)
+					Sound::GetInstance()->Play(eSound::sound_GuardBeckon);
 			}
 		}
 		GameObject::Update(dt, coObjects);
@@ -258,6 +260,18 @@ void Guard::GetBoundingBox(float & left, float & top, float & right, float & bot
 	}
 	top = y;
 	bottom = top + 56;
+}
+
+void Guard::Revival()
+{
+	this->health = 4;
+	this->x0 = x;
+	this->y0 = y;
+	isFinished = false;
+	animations[5]->SetCurrentFrame();
+	animations[6]->SetCurrentFrame();
+	animations[4]->SetCurrentFrame();
+	isBeingHurt = -1;
 }
 
 

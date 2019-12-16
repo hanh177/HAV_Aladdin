@@ -19,6 +19,7 @@ public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	void SubHealth(int th);
+	void Revival();
 	~Bat();
 
 };
