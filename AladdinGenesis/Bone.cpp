@@ -127,7 +127,6 @@ void Bone::CollisWithAladin()
 			mAladin->SetIsBeingHurt();
 			mAladin->StartUntouchableTime();
 		}
-		
 	}
 	else
 	{

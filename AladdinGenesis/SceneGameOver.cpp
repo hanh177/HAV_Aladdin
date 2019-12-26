@@ -1,7 +1,11 @@
 #include "SceneGameOver.h"
 #include "Sound.h"
+
 SceneGameOver::SceneGameOver()
 {
+	this->TimeBling = 0;
+	this->TimeBetweenBling = 0;
+	this->isDrawEndFont = true;
 	LoadResources();
 }
 
@@ -15,6 +19,12 @@ void SceneGameOver::KeyState(BYTE * state)
 
 void SceneGameOver::OnKeyDown(int KeyCode)
 {
+	if (KeyCode == DIK_ESCAPE)
+		DestroyWindow(CGame::GetInstance()->hWnd); // thoát
+	else
+	{
+		this->isPressedKey = true;
+	}
 }
 
 void SceneGameOver::OnKeyUp(int KeyCode)
@@ -35,43 +45,65 @@ void SceneGameOver::LoadResources()
 	CTexture * texture = CTexture::GetInstance();
 	CSprites * sprites = CSprites::GetInstance();
 	CAnimations * animations = CAnimations::GetInstance();
-	LPDIRECT3DTEXTURE9 tex = texture->Get(Type::ALADIN);
-	LPDIRECT3DTEXTURE9 tex2 = texture->Get(Type::ALADIN2);
+	LPDIRECT3DTEXTURE9 texAladin = texture->Get(Type::ALADIN);
+	LPDIRECT3DTEXTURE9 texAladin3 = texture->Get(Type::ALADIN3);
 
 	// di chuyen bt
-	file.open("Resources/Aladin/Win.txt");
-	file >> n;
+	
+	
 	LPANIMATION ani;
+	ani = new CAnimation(100);
+	file.open("Resources/Aladin/Death.txt");
+	file >> n;
 	ani = new CAnimation(100);
 	for (int i = 0; i < n; i++)
 	{
 		file >> id >> left >> top >> right >> bottom;
-		sprites->Add(20000 + id, left, top, right, bottom, tex);
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin3);
 		ani->Add(20000 + id);
 
 	}
 	animations->Add(100, ani);
-	AddAnimation(100);//1
+	AddAnimation(100);//27
 	file.close();
+	
 
 	ani = new CAnimation(100);
-	sprites->Add(20020, 513, 2851, 745, 2986, tex2);
-	ani->Add(20020);
+	file.open("Resources/Aladin/Death2.txt");
+	file >> n;
+	ani = new CAnimation(100);
+	for (int i = 0; i < n; i++)
+	{
+		file >> id >> left >> top >> right >> bottom;
+		sprites->Add(20000 + id, left, top, right, bottom, texAladin);
+		ani->Add(20000 + id);
+
+	}
 	animations->Add(200, ani);
-	AddAnimation(200);//1
+	AddAnimation(200);//27
+	file.close();
 }
 
 void SceneGameOver::Update(DWORD dt)
 {
-	Sound::GetInstance()->Play(eSound::sound_LevelComplete);
-	x += 1;
-	if (this->x >= 180)
-		isRender = true;
+	if (animations[0]->GetCurrentFrame() == 33)
+	{
+		state = 1;
+	}
+	if (isPressedKey)
+	{
+		SceneManager::GetInstance()->SetScene(new SceneGame(2));
+		
+	}
+
 }
 
 void SceneGameOver::Render()
 {
-	animations[0]->Render(x, y, 1, -1, D3DXVECTOR2(0, 0), 2);
-	if (isRender)
-		animations[1]->Render(260, 150, 0, 1, D3DXVECTOR2(0, 0), 2);
+	mFont->Draw(120, 30, "GAME OVER");
+	if (isDrawEndFont)
+	{
+		mFont->Draw(50, 130, "PUSH START OR ESC TO EXIT");
+	}
+	animations[state]->Render(180, 120, 1, 1, D3DXVECTOR2(0, 0), 2);
 }

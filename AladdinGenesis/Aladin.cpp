@@ -4,6 +4,17 @@
 
 Aladin *Aladin::_instance = NULL;
 
+void Aladin::ResetAll()
+{
+	this->health = 8;
+	this->life = 3;
+	this->isBeingHurt = false;
+	this->point = 0;
+	this->numApple = 30;
+	restartPoint = D3DXVECTOR2(113, 991);
+
+}
+
 Aladin *Aladin::GetInstance()
 {
 	if (_instance == NULL)
@@ -17,8 +28,10 @@ Aladin::Aladin()
 	this->type = ALADDIN;
 	this->health = 8;
 	numApple = 30;
-	LoadResources();
+	life = 3;
 	mApple = new Apple();
+	LoadResources();
+	
 }
 
 void Aladin::LoadResources()
@@ -41,7 +54,7 @@ void Aladin::LoadResources()
 	ani = new CAnimation(100);
 	ani->Add(20000);
 	animations->Add(100, ani);
-	AddAnimation(100);//0
+	AddAnimation(100);//0//ds cac animation
 
 	////IDLE2(quay ngang trai phai)
 	file.open("Resources/Aladin/Idle2.txt");
@@ -434,6 +447,7 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {	
 	if (health >= 0)
 	{
+		isSubLife = false;
 		isRestart = false;
 		isReSetAni = true;
 		if (climbing < 0 || isJumpOnRope)
@@ -482,7 +496,6 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		{
 			if (numApple > 0)
 			{
-
 				if (!isFinish)
 				{
 					mApple->SetSpeed(this->nx);
@@ -501,6 +514,10 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 	}
 	else
 	{
+		if (!isSubLife) {
+			life--;
+			isSubLife = true;
+		}
 		SceneManager::GetInstance()->SetEvent(0);
 		if (isReSetAni)
 		{
@@ -509,10 +526,8 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		}
 		if (animations[ALADIN_ANI_DEATH]->GetCurrentFrame() == 33)
 		{
-			life--;
 			health = 8;
 			SceneManager::GetInstance()->SetEvent(1);
-			
 			isBeingHurt = false;
 			untouchableTime = 0;
 		}
@@ -804,6 +819,7 @@ void Aladin::Render()
 
 		if (isBeingHurt)
 		{
+			Sound::GetInstance()->Play(eSound::sound_AladinHurt);
 			if (climbing != -1)
 				climbing = -1;
 			if (isSit || isSitAttach)
@@ -820,7 +836,6 @@ void Aladin::Render()
 					isBeingHurt = false;
 			}
 			dem = 0;
-
 			loop = 0;
 		}
 		if (this->nx == -1 && formSize != 3)
@@ -1074,7 +1089,8 @@ void Aladin::SetState(int state)
 				if (vx != 0)
 					index = 14;
 			} 
-			isAttachApple = true;
+			if(!isBeingHurt&&!isFaceUp)
+				isAttachApple = true;
 		}
 		else
 			currentState = 24;//tấn công khi đang leo
@@ -1286,7 +1302,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 		}
 	}
 
-	CalcPotentialCollisions(&list_Brick, coEvents);
+	CalcPotentialCollisions(&list_Brick, coEvents);//dua ra dc cac obj co the xay ra va cham(coEvents)
 
 	if (coEvents.size() == 0)
 	{
@@ -1297,7 +1313,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 	{
 		
 		float min_tx, min_ty, nx = 0, ny;
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);//dem loc ra xem laoi doi tuong, tg, huong
 		if (nx != 0) vx = 0;
 		//xet logic va cham voi brick
 		for (UINT i = 0; i < coEventsResult.size(); i++)
@@ -1484,7 +1500,7 @@ void Aladin::CollisionWithItems(vector<LPGAMEOBJECT>* coObject)
 	coEvents.clear();
 	coEventsResult.clear();
 
-	CalcPotentialCollisions(&listItems, coEvents);
+	CalcPotentialCollisions(&listItems, coEvents);//dung aabb de tien doan
 
 	if (coEvents.size() == 0)//co xay ra va cham
 	{

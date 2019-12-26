@@ -6,16 +6,21 @@
 #include"Sprite.h"
 #include"Texture.h"
 #include"GameObject.h"
-#include "Camera.h"
 
 
 class SceneGameOver :public Scene
 {
 
 	float x = 0, y = 0;
-	Font *mFont;
 	vector<LPANIMATION> animations;
-	bool isRender;
+	bool isRender, isPressedKey,isDrawEndFont;
+	int state = 0;
+
+	DWORD TimeBling;
+
+	DWORD TimeBetweenBling;
+	Font *mFont;
+	bool isDrawStartFont;
 public:
 	SceneGameOver();
 	~SceneGameOver();

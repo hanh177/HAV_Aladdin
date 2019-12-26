@@ -9,7 +9,6 @@ Skeleton::Skeleton(float x, float y, int direction)
 	this->nx = direction;
 	this->health = 1;
 	this->type = Type::SKELETON;
-	float tmp = 0;
 	state = 0;
 	LoadBone();
 	LoadResources();
@@ -114,7 +113,7 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	if (this->health <=0)
 	{
-		if (isBeingHurt == 1)
+		if (isBeingHurt == 1)//tu phat no hoac bi nem tao
 		{
 			isDestroy = true;
 			for (auto x : listBone)
@@ -138,7 +137,7 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		Aladin::GetInstance()->GetPosition(tmpX, tmpY);
 		if (abs(tmpX - this->x) <= ACTIVATE_ZONE && abs(tmpY - this->y) <= ACTIVATE_ZONE_Y)
 		{
-			state = 1;			
+			state = 1;//dung day			
 			if (isReset)
 			{
 				isReset = false;
@@ -146,7 +145,7 @@ void Skeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			if (animations[1]->GetCurrentFrame() == 18)
 			{
-				state = 2;
+				state = 2;//dung yen
 				dem++;
 				DebugOut(L"D", NULL);
 				if (dem >= 20)
@@ -178,7 +177,6 @@ void Skeleton::Revival()
 	animations[1]->SetCurrentFrame();
 	animations[3]->SetCurrentFrame();
 	isBeingHurt = -1;
-
 }
 
 void Skeleton::GetBoundingBox(float & left, float & top, float & right, float & bottom)

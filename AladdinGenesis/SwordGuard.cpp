@@ -33,7 +33,7 @@ void SwordGuard::Update(DWORD dt,float x, float y,int nx,int state)
 {
 	float tmpX, tmpY;
 	Aladin::GetInstance()->GetPosition(tmpX, tmpY);
-	if (state == 5)
+	if (state == 5)//con enemy no chet
 		return;
 	this->x = x;
 	this->y = y;
@@ -49,7 +49,6 @@ void SwordGuard::Update(DWORD dt,float x, float y,int nx,int state)
 	}
 	else
 	{
-	
 		if (dem > 30)
 		{
 			isFinished = true;

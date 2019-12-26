@@ -116,17 +116,20 @@ LPCOLLISIONEVENT GameObject::SweptAABBEx(LPGAMEOBJECT coO)
 		t, nx, ny
 	);
 
-	CCollisionEvent * e = new CCollisionEvent(t, nx, ny, coO);
+	CCollisionEvent * e = new CCollisionEvent(t, nx, ny, coO);//chua ket qua cua viec xet  va cham bao gom:
+	//1 obj duoc dem xet va cham voi doi tuong this, huong, tg bd va cham
 	return e;
 }
 
+//tien doan va cham
 void GameObject::CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents)
 {
-	for (UINT i = 0; i < coObjects->size(); i++)
+	//coObjects la ds cac obj duoc dem di xet va cham voi doi tuong this
+	for (UINT i = 0; i < coObjects->size(); i++)//xet lan luot cac obj do
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
-		if (e->t > 0 && e->t <= 1.0f)
+		if (e->t > 0 && e->t <= 1.0f)//thoa man thi co the xay ra va cham
 			coEvents.push_back(e);
 		else
 			delete e;

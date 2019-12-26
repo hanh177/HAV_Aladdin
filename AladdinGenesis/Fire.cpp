@@ -124,7 +124,7 @@ void Fire::CollisWithWall(vector<LPGAMEOBJECT> *coObjects)
 		if (AABBcollision(list_Wall.at(i)))
 			this->health = 0;
 		else
-			x += 1 * Snake_nx;
+			x += 0.5 * Snake_nx;
 	}
 
 

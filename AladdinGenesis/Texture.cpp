@@ -84,6 +84,7 @@ void CTexture::LoadTexTure()
 	Add(Type::BossBackGround, "Resources/Map/bossBackGround.png");
 	Add(Type::BACKGROUNDINTRO, "Resources/Object/BackGroundIntro.png");
 	Add(Type::BIRDINTRO, "Resources/Object/BirdIntro.png", D3DCOLOR_XRGB(84, 109, 142));
+	Add(Type::SELECTOR, "Resources/Object/Selector.png", D3DCOLOR_XRGB(255, 0, 255));
 
 	//Bbox
 	Add(Type::BOX, "Resources/Object/bbox.png");
@@ -91,6 +92,8 @@ void CTexture::LoadTexTure()
 	//Enemy
 	Add(Type::ENEMY_BAT, "Resources/Enemy/Bat.png", D3DCOLOR_XRGB(255, 0, 255));
 	Add(Type::GAME_INTRO, "Resources/Object/Intro.png", D3DCOLOR_XRGB(255, 0, 255));
+
+	Add(Type::FONT, "Resources/Font/font.png");
 }
 
 LPDIRECT3DTEXTURE9 CTexture::Get(Type id)

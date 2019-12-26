@@ -2,6 +2,7 @@
 #include "define.h"
 #include "Sound.h"
 
+
 SceneBoss::SceneBoss()
 {
 }
@@ -14,6 +15,8 @@ SceneBoss::SceneBoss(int state)
 	mCamera = Camera::GetInstance();
 	mBoard = Board::GetInstance();
 	mBoss = Boss::GetInstance();
+	mSnake = Snake::GetInstance();
+	mSFire = new StaticFire();
 	LoadResources();
 }
 
@@ -39,6 +42,7 @@ void SceneBoss::LoadResources()
 		AddObject(id, type, direction, width, height, x, y, state);
 	}
 	listObj.push_back(mBoss);
+	listObj.push_back(mSnake);
 	mCamera->SetTypeMap(MapBoss);
 	mAladin->SetPosition(47, 300);
 	mAladin->SetRestartPoint(D3DXVECTOR2(47, 300));
@@ -65,6 +69,7 @@ void SceneBoss::Render()
 		mBoss->Render();
 		mAladin->Render();
 		mBoard->Render();
+		mSFire->Render();
 		break;
 	case ALADIN_DIE:
 		mAladin->Render();
@@ -89,6 +94,7 @@ void SceneBoss::Update(DWORD dt)
 			mAladin->SetState(ALADIN_IDLE_STATE);
 		}
 		mAladin->Update(dt, &listObj);
+		mSFire->Update(dt, &listObj);
 		if (mBoss->GetHealth() <= 0)
 		{
 			Sound::GetInstance()->StopAll();
@@ -97,6 +103,9 @@ void SceneBoss::Update(DWORD dt)
 		break;
 	case ALADIN_DIE:
 		Sound::GetInstance()->StopAll();
+		DebugOut(L"G", NULL);
+		if (mAladin->GetLife() < 0)
+			SceneManager::GetInstance()->SetScene(new SceneGameOver());
 		mAladin->Update(dt, &listObj);
 		break;
 	}

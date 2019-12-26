@@ -11,12 +11,15 @@ SceneGame::SceneGame()
 SceneGame::SceneGame(int state)
 {
 	mAladin = Aladin::GetInstance();
+	if (state != 1) 
+		mAladin->ResetAll();
 	this->State = state;
 	this->mEvent = ALADIN_NORMAL;
 	mCamera = Camera::GetInstance();
-	mGrid = Grid::GetInstance();
+	mGrid = new Grid();
 	mBoard = Board::GetInstance();
 	mGrid->Clear();
+	obj.clear();
 	mSound = new Sound();
 	LoadResources();
 	
@@ -43,7 +46,8 @@ void SceneGame::LoadResources()
 	mMapObject = new MapObject("Resources/Map/mapObject.txt");
 	mCamera->SetTypeMap(Type::Map1);
 	xTrans = 2210;
-	mAladin->SetPosition(/*113,991*//*480,606*/ 1951,131);
+	mAladin->SetPosition(/*113,991*/ /*1951,131*/1859,938);
+	mAladin->SetHealth(8);
 	mGrid->SetGridPath("Resources/Object/Object.txt");
 	Sound::GetInstance()->Play(eSound::sound_Story);
 	
@@ -69,7 +73,6 @@ void SceneGame::Render()
 		mGamemap8->Draw(Type::Map8);
 		mGamemap9->Draw(Type::Map9);
 		mGamemap10->Draw(Type::Map10);
-
 		for (auto x : obj)
 		{
 			x->Render();
@@ -90,10 +93,10 @@ void SceneGame::Update(DWORD dt)
 	switch (mEvent)
 	{
 	case ALADIN_NORMAL:
-		if (!isTransitionScene)
+		if (!isTransitionScene)//cuoi map
 		{
 			Sound::GetInstance()->Play(eSound::sound_Story);
-			mGrid->ListObject(obj);
+			mGrid->ListObject(obj);//lay ra cac obj thuoc camera
 			mBoard->Update();
 			for (auto x : obj)
 			{
@@ -121,14 +124,14 @@ void SceneGame::Update(DWORD dt)
 		if(mAladin->GetLife()<0)
 			SceneManager::GetInstance()->SetScene(new SceneGameOver());
 		else
-			mAladin->Update(dt, &obj);
+			mAladin->Update(dt, &obj);//scenegame
 		Sound::GetInstance()->StopAll();
 		break;
 	}
 	
 }
 
-void SceneGame::KeyState(BYTE *state)
+void SceneGame::KeyState(BYTE *state)//nhan giu
 {
 	if (CKeyHandler::GetInstance()->isKeyDown(DIK_RIGHT))
 	{
@@ -220,7 +223,7 @@ void SceneGame::KeyState(BYTE *state)
 	}
 }
 
-void SceneGame::OnKeyDown(int KeyCode)
+void SceneGame::OnKeyDown(int KeyCode)//chi co tac dung 1 lan 
 {
 	switch (KeyCode)
 	{
@@ -242,6 +245,17 @@ void SceneGame::OnKeyDown(int KeyCode)
 		break;*/
 	case DIK_D:
 		mAladin->SetNumApple();
+		break;
+	case DIK_C:
+		float tmpX, tmpY;
+		mAladin->GetPosition(tmpX, tmpY);
+		if ((tmpX < 335 && tmpX>185) && (tmpY > 428 && tmpY < 576))
+			mAladin->SetPosition(225, 464);
+		else if (tmpX >= 2185 && tmpX <= 2254 && tmpY >= 724 && tmpY <= 826)
+			mAladin->SetPosition(2162, 515);
+		break;
+	case DIK_P:
+		mAladin->SetPosition(519, 724);
 		break;
 	}
 }

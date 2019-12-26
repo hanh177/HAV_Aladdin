@@ -9,7 +9,6 @@ class CSprite
 {
 	int id; //Sprite id in the sprite database/sheet
 
-
 	//rect the location
 	int left;
 	int top;
@@ -45,7 +44,7 @@ public:
 class CAnimationFrame
 {
 	LPSPRITE sprite;
-	DWORD time;
+	DWORD time;//tg chuyen giua cac frame
 
 public:
 	CAnimationFrame(LPSPRITE sprite, DWORD time) { this->sprite = sprite; this->time = time; };

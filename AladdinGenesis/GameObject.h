@@ -88,6 +88,7 @@ public:
 	void SubHealth(int x) { this->health = this->health - x; }
 	void SetFinish() { }
 	void Healing(int x) { this->health += x; }
+	void SetHealth(int x) { this->health = x; }
 
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);

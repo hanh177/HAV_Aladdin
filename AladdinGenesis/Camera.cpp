@@ -1,4 +1,4 @@
-#include"Camera.h"
+﻿#include"Camera.h"
 
 
 Camera *Camera::_instance = NULL;
@@ -18,7 +18,6 @@ void Camera::SetTypeMap(Type type_Map)
 
 Camera *Camera::GetInstance()
 {
-
 	if (_instance == NULL)
 		_instance = new Camera(SCREEN_WIDTH,SCREEN_HEIGHT+40);
 	return _instance;
@@ -28,7 +27,7 @@ Camera::Camera(int width, int height)
 {
 	this->mWidth = width;
 	this->mHeight = height;
-	mPosition = D3DXVECTOR3(SCREEN_WIDTH/2,SCREEN_HEIGHT/2, 0);
+	mPosition = D3DXVECTOR3(SCREEN_WIDTH/2,SCREEN_HEIGHT/2, 0);//vi tri ban dau
 }
 
 Camera::~Camera()
@@ -74,20 +73,20 @@ void Camera::SetPosition(D3DXVECTOR3 pos)
 	pos.y = (int)pos.y;
 	pos.x = (int)pos.x;
 
-	if (pos.x <= (SCREEN_WIDTH / 2))
+	if (pos.x <= (SCREEN_WIDTH / 2))//bên trái
 		pos.x = SCREEN_WIDTH / 2;
-	if (this->type == Map1)
+	if (this->type == Map1)//map thuong
 	{
-		if (pos.x >= 2111)
+		if (pos.x >= 2111)//bên phải
 			pos.x = 2111;
-		if (pos.y > 1000)
+		if (pos.y > 1000)//duoi đáy
 			pos.y = 1038;
-		if (pos.y <= 120)
+		if (pos.y <= 120)//mốc bên trên cùng
 			pos.y = 120;
 	}
 	else
 	{
-		if (pos.x >= 686)
+		if (pos.x >= 686)//map boss
 			pos.x = 686;
 	}
 	mPosition = pos;

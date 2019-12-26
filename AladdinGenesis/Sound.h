@@ -28,7 +28,8 @@ enum eSound
 	sound_BossTune=18,
 	sound_LevelComplete=19,
 	sound_JafarLaugh=20,
-	sound_JafarSnake = 21
+	sound_JafarSnake = 21,
+	sound_AladinHurt=22
 };
 
 

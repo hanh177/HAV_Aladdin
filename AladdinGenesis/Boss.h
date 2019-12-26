@@ -9,7 +9,8 @@ class Boss :public GameObject
 {
 	static Boss *_instance;
 	int state, dem = 0, timeDelay = 0;
-	bool isChange1 = true, isChange2 = true, isRevival1 = true, isRevival2 = true, isUsingFireSwirl = true, isReleasedSnake;
+	bool isChange1 = true, isChange2 = true, isRevival1 = true, isRevival2 = true,
+		isUsingFireSwirl = true, isReleasedSnake, isRender = true, isSet = true;
 	unordered_map<int,SwirlFire *> listSwirlFire;
 	vector<int> listUpdate;
 

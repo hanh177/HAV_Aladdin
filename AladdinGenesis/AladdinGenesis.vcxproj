@@ -150,6 +150,7 @@
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="StaticFire.cpp" />
     <ClCompile Include="SwirlFire.cpp" />
     <ClCompile Include="SwordGuard.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Snake.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StaticFire.h" />
     <ClInclude Include="SwirlFire.h" />
     <ClInclude Include="SwordGuard.h" />
     <ClInclude Include="Texture.h" />

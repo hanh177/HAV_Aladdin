@@ -34,6 +34,7 @@ void Sound::LoadResourceSound()
 	AddSound(eSound::sound_LevelComplete, Convert("Resources/Sound/LevelComplete.wav"));
 	AddSound(eSound::sound_JafarLaugh, Convert("Resources/Sound/JafarLaugh.wav"));
 	AddSound(eSound::sound_JafarSnake, Convert("Resources/Sound/JafarSnake.wav"));
+	AddSound(eSound::sound_AladinHurt, Convert("Resources/Sound/AladdinHurt.wav"));
 	
 }
 

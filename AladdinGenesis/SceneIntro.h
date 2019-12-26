@@ -10,14 +10,14 @@
 class SceneIntro :public Scene
 {
 	bool isPressedKey, isRenderBird;
-	DWORD TimeBling;
+	
 
 	DWORD TimeBetweenBling;
 	Font *mFont;
 	bool isDrawStartFont;
 	vector<LPANIMATION> animations;
-	int state = 0;
-	int x = 160, y = 0;
+	int state = 0, dem = 0, alpha = 255, dem2 = 0, stateRender = 0;
+	int x = 160, y = 0, sY = 155, sX = 120;
 public:
 	SceneIntro();
 	~SceneIntro();

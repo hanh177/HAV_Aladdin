@@ -27,10 +27,14 @@ using namespace std;
 
 #define MAX_GRID_ROW 2
 #define MAX_GRID_COLUMN 8
+
+//chia map thanh cac cell
+//moi cell chua 1 ds cac obj thuoc cell do
+//camera thuoc cell nao thi lay obj thuoc cell do ra
 class Grid
 {
-	LPCSTR gridPath;
-	vector<GameObject*> cells[MAX_GRID_ROW][MAX_GRID_COLUMN];
+	LPCSTR gridPath;//duong dan chua file cac obj
+	vector<GameObject*> cells[MAX_GRID_ROW][MAX_GRID_COLUMN];//vector hai chieu 
 	static Grid *_instance;
 	bool isResetMV = true, isResetBob = true;
 

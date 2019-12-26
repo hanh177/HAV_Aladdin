@@ -12,10 +12,13 @@ SceneWin::~SceneWin()
 
 void SceneWin::KeyState(BYTE * state)
 {
+	
 }
 
 void SceneWin::OnKeyDown(int KeyCode)
 {
+	if (KeyCode == DIK_ESCAPE)
+		DestroyWindow(CGame::GetInstance()->hWnd); // thoát
 }
 
 void SceneWin::OnKeyUp(int KeyCode)
@@ -98,6 +101,25 @@ void SceneWin::Update(DWORD dt)
 	xG += dx;
 	if (this->x >= 180)
 		isRender = true;
+
+	if (dem > 30)
+	{
+		if (dem2 < 10)
+		{
+			alpha = 0;
+			dem2++;
+		}
+		else
+		{
+			dem = 0;
+			dem2 = 0;
+		}
+	}
+	else
+	{
+		alpha = 255;
+		dem++;
+	}
 }
 
 void SceneWin::Render()
@@ -109,4 +131,6 @@ void SceneWin::Render()
 	animations[2]->Render(xG+toX, yG, 1, nx, D3DXVECTOR2(0, 0), 2);
 	if(isRender)
 		animations[1]->Render(260, 150, 0, 1, D3DXVECTOR2(0, 0), 2);
+
+	mFont->Draw(75, 150, "PUSH ESC TO EXIT", alpha);
 }

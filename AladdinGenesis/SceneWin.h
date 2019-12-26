@@ -15,7 +15,7 @@ class SceneWin :public Scene
 	float x = 0, y = 130;
 	float xG = 32, yG = 200, dx = 0;
 	bool isChange;
-	int nx = 1;
+	int nx = 1, dem=0, dem2=0,alpha=255;
 		Font *mFont;
 		vector<LPANIMATION> animations;
 		bool isRender;

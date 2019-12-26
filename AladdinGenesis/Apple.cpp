@@ -163,7 +163,7 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 	listEnemy.clear();
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
-		if ((coObjects->at(i)->GetType() == Type::BAT|| coObjects->at(i)->GetType()==Type::GUARD|| coObjects->at(i)->GetType() == Type::MONKEY|| coObjects->at(i)->GetType() == Type::SKELETON|| coObjects->at(i)->GetType() == Type::BOSS)
+		if ((coObjects->at(i)->GetType() == Type::BAT|| coObjects->at(i)->GetType()==Type::GUARD|| coObjects->at(i)->GetType() == Type::MONKEY|| coObjects->at(i)->GetType() == Type::SKELETON|| coObjects->at(i)->GetType() == Type::BOSS || coObjects->at(i)->GetType() == Type::SNAKE)
 			&& coObjects->at(i)->GetHealth()!=0)
 		{
 			listEnemy.push_back(coObjects->at(i));
@@ -177,7 +177,7 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 		for (int i = 0; i < listEnemy.size(); i++)
 		{
 			LPGAMEOBJECT e = listEnemy.at(i);
-			if (e->GetType() == Type::BOSS)
+			if (e->GetType() == Type::BOSS|| e->GetType() == Type::SNAKE)
 			{
 				if (AABBcollision(e))
 				{

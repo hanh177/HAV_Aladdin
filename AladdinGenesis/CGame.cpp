@@ -136,8 +136,8 @@ void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy
 
 	if (dx > 0)
 	{
-		dx_entry = sl - mr;
-		dx_exit = sr - ml;
+		dx_entry = sl - mr;//quang duong can di de bat dau xuat hien va cham(ox)
+		dx_exit = sr - ml;// qd can di tu luc bat dau xet cho den luc bat dau het va cham
 	}
 	else if (dx < 0)
 	{
@@ -146,7 +146,7 @@ void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy
 	}
 
 
-	if (dy > 0)
+	if (dy > 0)//(oy)
 	{
 		dy_entry = st - mb;
 		dy_exit = sb - mt;
@@ -157,7 +157,7 @@ void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy
 		dy_exit = st - mb;
 	}
 
-	if (dx == 0)
+	if (dx == 0)//k xet vat k co van toc
 	{
 		tx_entry = -99999999999;
 		tx_exit = 99999999999;
@@ -182,7 +182,7 @@ void CGame::SweptAABB(float ml, float mt, float mr, float mb, float dx, float dy
 
 	if ((tx_entry < 0.0f && ty_entry < 0.0f) || tx_entry > 1.0f || ty_entry > 1.0f) return;
 
-	t_entry = max(tx_entry, ty_entry);
+	t_entry = max(tx_entry, ty_entry);//tg bat dau xay ra va cham tu luc xet
 	t_exit = min(tx_exit, ty_exit);
 
 	if (t_entry > t_exit) return;

@@ -83,10 +83,8 @@ void Bat::LoadResources()
 void Bat::Render()
 {
 	if (this->health == 0)
-	{
 		if(isFinished)
 			return;
-	}
 	animations[state]->Render(x+10, y+7, 1, this->nx, Camera::GetInstance()->GetTranform());
 	if (DISPLAY_BOX == 1)
 	{
@@ -96,7 +94,7 @@ void Bat::Render()
 
 void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	if (this->health == 0)
+	if (this->health <= 0)
 	{
 		if (!isFinished)
 		{
@@ -106,12 +104,11 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				dem = 0;
 			}
 			state = 2;
-			if (animations[2]->GetCurrentFrame()== 7)
+			if (animations[2]->GetCurrentFrame() == 7)
 			{
 				isFinished = true;
 				Aladin::GetInstance()->PlusPoint(100);
 			}
-			
 		}
 		else
 			return;

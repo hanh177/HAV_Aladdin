@@ -86,7 +86,7 @@ class Aladin :public GameObject
 private:
 	static Aladin * _instance;
 	//restart
-	D3DXVECTOR2 restartPoint=D3DXVECTOR2(113, 991);
+	D3DXVECTOR2 restartPoint=D3DXVECTOR2(113, 991);//mac dinh ban dau
 	bool isRestart, isReSetAni = true;
 	int idRestartPoint = 0;
 	
@@ -111,9 +111,9 @@ private:
 	DWORD untouchableTime = 0;
 	//Weapon
 	Apple  *mApple;
-	bool isAttachApple, isFinish = true, isAttacking, isUntouchable, isSitAttach;
+	bool isAttachApple, isFinish = true, isAttacking, isUntouchable, isSitAttach, isSubLife;
 	//items
-	int numRedJewel = 0, numApple = 0, collisGuard = 0, point = 0,life = 10;
+	int numRedJewel = 0, numApple = 0, collisGuard = 0, point = 0,life = 0;
 
 	float changeVx = 1;
 public:
@@ -251,6 +251,10 @@ public:
 		restartPoint = pos;
 	}
 	int GetLife() { return this->life; }
+
+	void ResetAll();
+
+	bool GetIsCollisWithBrick() { return this->isCollisWithBrick; }
 	static Aladin *GetInstance();
 	~Aladin();
 };

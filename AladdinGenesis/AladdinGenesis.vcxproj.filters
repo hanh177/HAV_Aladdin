@@ -148,6 +148,9 @@
     <Filter Include="GameComponents\Sound">
       <UniqueIdentifier>{2cb914b2-4c6d-408c-ae41-4ceb2d1f6b43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Weapon\StaticFire">
+      <UniqueIdentifier>{54ebff63-89a2-480d-9294-b630c91947c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -309,6 +312,9 @@
     <ClCompile Include="SceneGameOver.cpp">
       <Filter>Scenes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="StaticFire.cpp">
+      <Filter>Object\Weapon\StaticFire</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -466,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="SceneGameOver.h">
       <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticFire.h">
+      <Filter>Object\Weapon\StaticFire</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

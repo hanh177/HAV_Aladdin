@@ -1,6 +1,7 @@
 #include "Snake.h"
 #include "Aladin.h"
 #include "Sound.h"
+#include "Boss.h"
 
 Snake *Snake::_instance = NULL;
 
@@ -14,9 +15,9 @@ Snake *Snake::GetInstance()
 Snake::Snake()
 {
 	this->type = Type::SNAKE;
-	this->x = 380;
+	this->x = 450;
 	this->y = 360;
-	mFire = new Fire(this->x, this->y);
+	this->health = 0;
 	for (int i = 0; i < NUM_OF_FIRE; i++)
 	{
 		Fire * mFire = new Fire(this->x, this->y);
@@ -94,6 +95,7 @@ void Snake::LoadResources()
 
 void Snake::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	if (this->health <= 0) return;
 	float tmpX, tmpY;
 	Aladin *mAladin = Aladin::GetInstance();
 	mAladin->GetPosition(tmpX, tmpY);
@@ -152,10 +154,12 @@ void Snake::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (GetTickCount() - mAladin->GetUntouchableTime() >= ALADIN_BEINGHURT_TIME)
 		CollisWithAladin();
 	if (Aladin::GetInstance()->GetHealth() < 0) ReSetEveryThing();
+
 }
 
 void Snake::Render()
 {
+	if (this->health <= 0) return;
 	int toX = 0;
 	if (this->nx == 1)
 		toX = -60;
@@ -217,21 +221,17 @@ void Snake::CollisWithAladin()
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
-bool Snake::CheckFire()
-{
-	
-	return false;
-}
-
 void Snake::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
 	if (this->nx == -1)
-		left = this->x;
+	{
+		left = this->x - 70;
+	}
 	else
-		left = this->x - 60;
-	top = this->y;
-	right = left + 73;
-	bottom = top + 86;
+		left = this->x;
+	top = this->y - 35;
+	right = left + 70;
+	bottom = top + 82;
 }	
 
 void Snake::ReSetEveryThing()

@@ -10,6 +10,8 @@
 #include "Board.h"
 #include "Boss.h"
 #include "SceneWin.h"
+#include "Snake.h"
+#include "StaticFire.h"
 
 
 #define ALADIN_NORMAL 1
@@ -26,7 +28,8 @@ class SceneBoss :public Scene
 	bool isRunning;
 	DWORD  time;
 	Boss *mBoss;
-
+	Snake *mSnake;
+	StaticFire *mSFire;
 
 	vector<LPGAMEOBJECT> listObj;
 public:

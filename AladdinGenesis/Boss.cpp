@@ -4,6 +4,7 @@
 
 Boss *Boss::_instance = NULL;
 
+
 Boss *Boss::GetInstance()
 {
 	if (_instance == NULL)
@@ -83,8 +84,6 @@ void Boss::LoadResources()
 	file.close();
 }
 
-
-
 void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	float tmpX, tmpY;
@@ -99,6 +98,8 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		if (tmpX - this->x <= 0)
 		{
+			state = 1;
+			this->nx = -1;
 			if (isRevival1)
 			{
 				listUpdate.clear();
@@ -106,6 +107,7 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				for (int i = 0; i < NUM_OF_SWIRL; i++)
 					listSwirlFire[i]->Revival();
 			}
+
 			if (isChange1)
 			{
 				dem = 0;
@@ -115,8 +117,7 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				isRevival2 = true;
 				isRevival1 = false;
 			}
-			state = 1;
-			this->nx = -1;
+			
 			if (animations[1]->GetCurrentFrame() == 6)
 			{
 				dem++;
@@ -125,15 +126,15 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					isChange1 = true;
 					animations[1]->SetCurrentFrame();
-					if (GetTickCount() - timeUsingFireSwirl <= TIME_USING_FIRE_SWIRL)
-						isRevival1 = true;
-					else
-						isUsingFireSwirl = false;
+					if (this->health>13) isRevival1 = true;
+					else isUsingFireSwirl = false;
 				}
 			}
 		}
 		else
 		{
+			state = 1;
+			this->nx = 1;
 			if (isRevival2)
 			{
 				listUpdate.clear();
@@ -150,26 +151,20 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				isRevival1 = true;
 				isRevival2 = false;
 			}
-			state = 1;
-			this->nx = 1;
+			
 			if (animations[1]->GetCurrentFrame() == 6)
 			{
 				state = 0;
 				dem++;
-				state = 0;
 				if (dem >= 160)
 				{
-					if (GetTickCount() - timeUsingFireSwirl <= TIME_USING_FIRE_SWIRL)
-						isRevival2 = true;
-					else
-						isUsingFireSwirl = false;
 					isChange2 = true;
-
 					animations[1]->SetCurrentFrame();
+					if (this->health > 13) isRevival2 = true;
+					else isUsingFireSwirl = false;
 				}
 			}
 		}
-
 		if (GetTickCount() - mAladin->GetUntouchableTime() >= ALADIN_BEINGHURT_TIME)
 			CollisWithAladin();
 		if (timeDelay == 0)
@@ -197,9 +192,16 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		state = 3;
 		if (animations[3]->GetCurrentFrame() == 6) {
 			isReleasedSnake = true;
+			isRender = false;
 			state = 0;
+			if (isSet)
+			{
+				mSnake->SetHealth(12);
+				isSet = false;
+			}
 		}
 		if (isReleasedSnake) mSnake->Update(dt, coObjects);
+		if (mSnake->GetHealth() <= 0&&isReleasedSnake) this->health = 0;
 	}
 }
 
@@ -207,12 +209,15 @@ void Boss::Render()
 {
 	if (health <= 0)
 		return;
-	animations[state]->Render(this->x,this->y, 1, this->nx, Camera::GetInstance()->GetTranform(), 0);
+	if(isRender)
+		animations[state]->Render(this->x,this->y, 1, this->nx, Camera::GetInstance()->GetTranform(), 0);
+
 	for (int i = 0; i < listUpdate.size(); i++)
 		listSwirlFire[listUpdate.at(i)]->Render();
 
 	if (isReleasedSnake)
 		mSnake->Render();
+
 	if (DISPLAY_BOX == 1)
 	{
 		if(this->nx==-1)
@@ -224,11 +229,16 @@ void Boss::Render()
 
 void Boss::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	if (this->nx == -1) left = this->x-20;
-	else left = this->x - 32;
-	right = left + 64;
-	top = this->y;
-	bottom = top + 71;
+	if (isRender)
+	{
+		if (this->nx == -1) left = this->x - 20;
+		else left = this->x - 32;
+		right = left + 64;
+		top = this->y;
+		bottom = top + 71;
+	}
+	else
+		left = top = right = bottom = 0;
 }
 bool Boss::CheckSwirlFire()
 {

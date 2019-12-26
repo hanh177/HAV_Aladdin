@@ -27,8 +27,6 @@ void Grid::SetGridPath(LPCSTR gridPath)
 	{
 		for (int j = 0; j < MAX_GRID_COLUMN; j++)
 		{
-			
-			int data;
 			ObjMtrx << i << " " << j << " ";
 			for (int z = 0; z < cells[i][j].size(); z++)
 			{
@@ -72,7 +70,7 @@ void Grid::LoadGrid()
 	}
 }
 
-
+//add cac obj vao cac cell ma no thuoc ve
 void Grid::LoadObjectIntoGrid(int id, int type, int direction, int width, int height, float x, float y,int state)
 {
 	//xac dinh left, top, rigth, bottom cua no thuoc cell nao
@@ -151,24 +149,25 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 	}
 }
 
-
+//lay cac obj cua cac cell dang thuoc camera trong ham update se goi toi
 void Grid::ListObject(vector<GameObject*> &listObj)
 {
 	vector <int> listID;
 	Camera *camera = Camera::GetInstance();
 	RECT r = camera->GetBound();
 
+	//xac dinh camera dang thuoc nhung cell nao
 	int left_cell = (int)(r.left / GRID_CELL_WIDTH);
 	int right_cell = (int)(r.right / GRID_CELL_WIDTH);
 	int top_cell = (int)(r.top / GRID_CELL_HEIGHT);
 	int bottom_cell = (int)(r.bottom / GRID_CELL_HEIGHT);
-	//lay ds cac object ra xem no con nam trong vung camera hay khong
 
 	listObj.clear();
 
 	//can 1 DS cac object dang nam trong vung camera
 	unordered_map<int, GameObject*> mapObj;
 
+	//xet het cac cell thuoc camera
 	for (int i = top_cell; i <= bottom_cell; i++)//Theo Hang
 	{
 		for (int j = left_cell; j <= right_cell; j++)//Theo cot
@@ -177,42 +176,15 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 			ReadMatrixGrid(i, j, listID);*/
 			for (int k = 0; k < cells[i][j].size(); k++)
 			{
+				//add zo
 				mapObj[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);//them vao neu chua co trong mapObject
 				//mapObj[listID.at(k)]= cells[i][j].at(k);
 			}
 		}
 	}
 
-
-	
-	int demmv = 0, dembob = 0;
 	for (auto& x : mapObj)
-	{
-		/*if (x.second->GetType() == Type::MOVINGBRICK&&isResetMV)
-		{
-			x.second->Reset();
-		}
-		if (x.second->GetType() == Type::MOVINGBRICK)
-			dembob++;
-		if (x.second->GetType() == Type::BOB&&isResetBob)
-		{
-			x.second->Reset();
-		}
-		if (x.second->GetType() == Type::MOVINGBRICK)
-			demmv++;*/
 		listObj.push_back(x.second);
-	}
-
-	if (demmv == 0)//k co movingbrick
-		isResetMV = true;
-	else
-		isResetMV = false;
-
-	if (dembob == 0)//k co bob
-		isResetBob = true;
-	else
-		isResetBob = false;
-
 }
 
 void Grid::ReadMatrixGrid(int row,int column,vector<int> &IdObj)
@@ -262,6 +234,7 @@ void Grid::FindObjInMatrix(int &i, int &j)
 {
 
 }
+
 void Grid::Revival(vector<GameObject*> listObj)
 {
 	for (int i = 0; i < MAX_GRID_ROW; i++)
@@ -276,6 +249,7 @@ void Grid::Revival(vector<GameObject*> listObj)
 		}
 	}
 }
+
 Grid::~Grid()
 {
 
