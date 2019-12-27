@@ -46,10 +46,9 @@ void SceneGame::LoadResources()
 	mMapObject = new MapObject("Resources/Map/mapObject.txt");
 	mCamera->SetTypeMap(Type::Map1);
 	xTrans = 2210;
-	mAladin->SetPosition(/*113,991*/ /*1951,131*/1859,938);
+	mAladin->SetPosition(113,991 /*1951,131*/);
 	mAladin->SetHealth(8);
 	mGrid->SetGridPath("Resources/Object/Object.txt");
-	Sound::GetInstance()->Play(eSound::sound_Story);
 	
 }
 
@@ -95,7 +94,7 @@ void SceneGame::Update(DWORD dt)
 	case ALADIN_NORMAL:
 		if (!isTransitionScene)//cuoi map
 		{
-			Sound::GetInstance()->Play(eSound::sound_Story);
+			Sound::GetInstance()->Play(eSound::sound_Storyline);
 			mGrid->ListObject(obj);//lay ra cac obj thuoc camera
 			mBoard->Update();
 			for (auto x : obj)

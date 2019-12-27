@@ -18,7 +18,7 @@ using namespace std;
 
 class Apple : public Weapon
 {
-	bool isFinish, isplay;
+	bool  isplay, isFinish;
 	int state, demSubGuard = -1;
 public:
 	Apple();

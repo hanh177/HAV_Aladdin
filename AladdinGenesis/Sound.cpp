@@ -26,7 +26,6 @@ void Sound::LoadResourceSound()
 	AddSound(eSound::sound_AladinPush, Convert("Resources/Sound/AladdinPush.wav"));
 	AddSound(eSound::sound_GuardBeckon, Convert("Resources/Sound/GuardBeckon.wav"));
 	AddSound(eSound::sound_Storyline, Convert("Resources/Sound/Storyline.wav"));
-	AddSound(eSound::sound_Story, Convert("Resources/Sound/Story.wav"));
 	AddSound(eSound::sound_Wow, Convert("Resources/Sound/Wow!.wav"));
 	AddSound(eSound::sound_ContinuePoint, Convert("Resources/Sound/ContinuePoint.wav"));
 	AddSound(eSound::sound_Iiee, Convert("Resources/Sound/Iiee.wav"));

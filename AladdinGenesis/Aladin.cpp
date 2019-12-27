@@ -510,7 +510,10 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		if (vx < 0 && x < 8) x = 8;
 		if (vy <= 0 && y <= 5) y = 5;
 		if (x >= 2225) x = 2225;
-		Camera::GetInstance()->SetPosition(x + 46, y + 50);
+		int deltaY = 0;
+		if (isFaceUp&&isCollisWithBrick) deltaY = -70;
+		else if (isSit || isSitAttach) deltaY = 70;
+		Camera::GetInstance()->SetPosition(x + 46, y + 50 + deltaY);
 	}
 	else
 	{
@@ -1089,14 +1092,17 @@ void Aladin::SetState(int state)
 				if (vx != 0)
 					index = 14;
 			} 
-			if(!isBeingHurt&&!isFaceUp)
+			if (!isBeingHurt && !isFaceUp)
+			{
 				isAttachApple = true;
+				mApple->Revival();
+			}
 		}
 		else
 			currentState = 24;//tấn công khi đang leo
 		isBusy = true;
 		isFinish = false;
-		mApple->Revival();
+		
 		Sound::GetInstance()->Play(eSound::sound_ThrowApple);
 		if (isResetFrame)
 		{
@@ -1325,6 +1331,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				//DebugOut(L"Collision", NULL);
 				if (e->nx != 0)//co xay ra va cham theo phuong Ox
 				{
+					if (isCollisWithWall) dx = 0;
 					x += dx;
 				}
 				else//k xay ra va cham theo phuong Ox
@@ -1339,12 +1346,14 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 						vy = 0;
 					}
 					isCollisWithBrick = true;
+					if (isCollisWithWall) dy = 0;
 				}
 				else// Nhay duoi len(ny==1)
 				{
 					/*if(e->ny==0)*/
 						y += dy;
 				}
+				
 			}
 			else
 			{
@@ -1412,9 +1421,10 @@ void Aladin::CollisionWithWall(vector<LPGAMEOBJECT>* coObject)
 			{
 				dx = 0;
 				isCollisWithWall = true;
-				if(e->ny==-1)
+				if(e->ny!=0)
 					x += min_tx * dx + nx * 0.4f;
 			}
+			else x += min_tx * dx + nx * 0.4f;
 			if (e->ny == 1)
 				dx = 0;
 
@@ -1422,7 +1432,30 @@ void Aladin::CollisionWithWall(vector<LPGAMEOBJECT>* coObject)
 	}
 	else
 	{
-		isCollisWithWall = false;
+		int demCollis = 0;
+		for (int i = 0; i <list_Wall.size(); i++) {
+			if (AABBcollision(list_Wall.at(i)))
+			{
+				/*if (coEvents.at(i)->nx == 0)
+				{*/
+				if (list_Wall.at(i)->GetPosX() < this->x) {
+					if (this->nx == -1) {
+						isCollisWithWall = true;
+						demCollis++;
+						dx = 0;
+					}
+				}
+				else if (list_Wall.at(i)->GetPosX() > (this->x-4)) {
+					if (this->nx == 1) {
+						isCollisWithWall = true;
+						demCollis++;
+						dx = 0;
+					}
+				}
+			}
+		}
+		if(demCollis==0)
+			isCollisWithWall = false;
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }

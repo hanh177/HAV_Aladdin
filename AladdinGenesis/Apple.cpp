@@ -8,7 +8,7 @@ Apple::Apple()
 	this->type = Type::APPLE;
 	this->health = 1;
 	this->x = this->y = 0;
-	isFinished = false;
+	isFinished = true;
 	LoadResources();
 }
 
@@ -130,6 +130,7 @@ void Apple::CollisionWithStaticObj(vector<LPGAMEOBJECT>* coObjects)
 	{
 		x += dx;
 		y += dy;
+
 	}
 	else
 	{
@@ -226,7 +227,6 @@ void Apple::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObjects)
 			this->health = 0;
 		}
 	}
-
 }
 
 void Apple::GetBoundingBox(float & left, float & top, float & right, float & bottom)
